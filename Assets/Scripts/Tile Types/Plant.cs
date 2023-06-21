@@ -95,9 +95,9 @@ public class Plant : Tile
                         transform.eulerAngles = new Vector3(0, 0, -90);
                         break;
                     case Dir.Up:
-                        //Rot 90
+                        //Rot -90
                         spriteRenderer.sprite = species.cornerSprite;
-                        transform.eulerAngles = new Vector3(0, 0, 90);
+                        transform.eulerAngles = new Vector3(0, 0, -90);
                         break;
                     case Dir.Down:
                         //Rot -90 Flip X
@@ -126,6 +126,7 @@ public class Plant : Tile
                         //Rot 90
                         spriteRenderer.sprite = species.cornerSprite;
                         transform.eulerAngles = new Vector3(0, 0, 90);
+                        spriteRenderer.flipX = true;
                         break;
                     case Dir.Down:
                         //Rot +90
