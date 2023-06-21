@@ -11,7 +11,9 @@ public class PlantObject : ScriptableObject
     public int effectSpace;
     public Sprite straightSprite;
     public Sprite cornerSprite;
+    public Sprite startSprite;
     public Sprite endSprite;
+    // public Sprite endPointSprite;
     public List<ColorPair> colorList;
 }
 [System.Serializable]
