@@ -130,4 +130,14 @@ public class Board : MonoBehaviour
         }
         return result;
     }
+
+    public bool AreAnyAdjacentPlants(Tile origin) {
+        Tile[] adjacents = GetAllAdjacentTiles(origin);
+        for(int i = 0; i<adjacents.Length; i++) {
+            if(adjacents[i] is Plant || adjacents[i] is PlantPoint) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
