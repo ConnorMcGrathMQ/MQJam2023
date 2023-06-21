@@ -83,9 +83,9 @@ public class PlayerController : MonoBehaviour
                 targetCell = new Vector3Int(targetCell.x, Board.Instance.gridSize - 1, 0);
             }
             targetTile = Board.Instance.GetTile(targetCell);
-            Debug.Log(targetCell);
-            Debug.Log(targetTile);
-            Debug.Log(targetTile.ToString());
+            // Debug.Log(targetCell);
+            // Debug.Log(targetTile);
+            // Debug.Log(targetTile.ToString());
             // diff = ClampVector(dragAction.ReadValue<Vector2>());
             if(targetPlant == null) {
                 if(targetTile is Plant p) {

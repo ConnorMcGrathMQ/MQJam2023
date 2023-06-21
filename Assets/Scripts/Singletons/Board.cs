@@ -61,7 +61,8 @@ public class Board : MonoBehaviour
         Tile location = tiles[pos.x,pos.y];
         Tile old = null;
         Tile newTile = null;
-        if (location != null && replace == false) {
+        if (location != null && !(location is Empty) && replace == false) {
+            // Debug.Log($"{location.ToString()} Is Null! Hahah");
             return;
         } else {
             newTile = Instantiate(tilePrefab, grid.GetCellCenterWorld(new Vector3Int(pos.x, pos.y, 0)), 
@@ -69,8 +70,11 @@ public class Board : MonoBehaviour
             old = location;
             tiles[pos.x, pos.y] = newTile;
             newTile.pos = pos;
+            newTile.gameObject.name = newTile.ToString();
         }
         if (old != null) {
+            Destroy(old.gameObject);
+        } else if (old != null && !(old is Empty)) {
             Destroy(old.gameObject);
         }
     }

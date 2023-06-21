@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pos: {x: 0, y: 0}
-  species: 0
+  species: {fileID: 11400000, guid: 2aa69a14a68c0be4cbc4d964b17bc995, type: 2}
