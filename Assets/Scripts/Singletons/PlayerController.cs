@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
                     targetPlant.pos = point.pos;
                     targetPlant.transform.position = new Vector3(1000, 0, 0);
                 }
-            } else if (targetTile is Empty) {
+            } else if (targetTile is Empty && Board.Instance.AreAnyAdjacentPlants(targetTile)) {
                 Board.Instance.AddTile(targetPlant, targetTile.pos);
             }
             yield return null;
