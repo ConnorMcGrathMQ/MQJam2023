@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 905295609526891049}
-  - component: {fileID: 7945498252373563711}
+  - component: {fileID: 2858516578503416587}
   m_Layer: 0
-  m_Name: Empty Tile
+  m_Name: Plant Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7945498252373563711
+--- !u!114 &2858516578503416587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6437700370565699082}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fca6ef947418ca144b47d4021d03b0c5, type: 3}
+  m_Script: {fileID: 11500000, guid: addba4c72a43b014da650bca1766a4d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pos: {x: 0, y: 0}
+  species: {fileID: 0}
+  remainingDist: 0
+  inDir: 0
+  outDir: 0

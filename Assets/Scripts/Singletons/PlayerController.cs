@@ -63,8 +63,8 @@ public class PlayerController : MonoBehaviour
     private IEnumerator DragMovement() {
         Tile targetTile;
         Vector3Int targetCell;
+        Plant targetPlant = null;
         while(true) {
-            // targetTile = 
             targetCell = Board.Instance.GetComponent<Grid>().WorldToCell(
                     Camera.main.ScreenToWorldPoint(new Vector3(positionAction.ReadValue<Vector2>().x, 
                         positionAction.ReadValue<Vector2>().y, 0)));
@@ -82,6 +82,12 @@ public class PlayerController : MonoBehaviour
             Debug.Log(targetCell);
             Debug.Log(targetTile);
             Debug.Log(targetTile.ToString());
+            if(targetPlant == null) {
+
+            }
+            if(targetTile is Plant p) {
+                targetPlant = p;
+            }
             yield return null;
         }
     }
