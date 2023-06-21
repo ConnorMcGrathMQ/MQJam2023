@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Plant : Tile
 {
-    public PlantType type;
+    public PlantObject species;
 
     public int remainingDist;
 
