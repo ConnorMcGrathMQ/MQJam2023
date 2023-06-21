@@ -57,14 +57,35 @@ public class Plant : Tile
         spriteRenderer.color = species.colorList[0].vineColour;
         transform.eulerAngles = new Vector3(0, 0, 0);
         spriteRenderer.flipX = false;
-        if (outDir == Dir.None) {
-            spriteRenderer.sprite = species.endSprite;
-        }
         switch (inDir)
         {
+            case Dir.None:
+                spriteRenderer.sprite = species.startSprite;
+                switch (outDir)
+                {
+                    case Dir.None:
+                        //Panic
+                        break;
+                    case Dir.Left:
+                        transform.eulerAngles = new Vector3(0, 0, -90);
+                        break;
+                    case Dir.Right:
+                        transform.eulerAngles = new Vector3(0, 0, 90);
+                        break;
+                    case Dir.Up:
+                        transform.eulerAngles = new Vector3(0, 0, 180);
+                        break;
+                    case Dir.Down:
+                        break;
+                }
+                break;
             case Dir.Left:
                 switch (outDir)
                 {
+                    case Dir.None:
+                        spriteRenderer.sprite = species.endSprite;
+                        transform.eulerAngles = new Vector3(0, 0, -90);
+                        break;
                     case Dir.Left:
                         //Cannot lead to self
                         break;
@@ -89,6 +110,10 @@ public class Plant : Tile
             case Dir.Right:
                 switch (outDir)
                 {
+                    case Dir.None:
+                        spriteRenderer.sprite = species.endSprite;
+                        transform.eulerAngles = new Vector3(0, 0, 90);
+                        break;
                     case Dir.Left:
                         //Rot +90
                         spriteRenderer.sprite = species.straightSprite;
@@ -112,6 +137,10 @@ public class Plant : Tile
             case Dir.Up:
                 switch (outDir)
                 {
+                    case Dir.None:
+                        spriteRenderer.sprite = species.endSprite;
+                        transform.eulerAngles = new Vector3(0, 0, 180);
+                        break;
                     case Dir.Left:
                         //Rot 180 and Flip X
                         spriteRenderer.sprite = species.cornerSprite;
@@ -136,6 +165,9 @@ public class Plant : Tile
             case Dir.Down:
                 switch (outDir)
                 {
+                    case Dir.None:
+                        spriteRenderer.sprite = species.endSprite;
+                        break;
                     case Dir.Left:
                         //Default
                         spriteRenderer.sprite = species.cornerSprite;
