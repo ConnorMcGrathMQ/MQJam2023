@@ -98,9 +98,9 @@ public class Plant : Tile
                         //Cannot lead to self
                         break;
                     case Dir.Up:
-                        //Rot -90
+                        //Rot 90
                         spriteRenderer.sprite = species.cornerSprite;
-                        transform.eulerAngles = new Vector3(0, 0, -90);
+                        transform.eulerAngles = new Vector3(0, 0, 90);
                         break;
                     case Dir.Down:
                         //Rot +90
