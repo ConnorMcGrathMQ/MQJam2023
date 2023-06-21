@@ -110,6 +110,9 @@ public class PlayerController : MonoBehaviour
             } else if (targetTile is Plant plant && (plant.outDir != Dir.None || !plant.species.Equals(targetPlant.species))) {
                 Debug.Log($"Intersected Plant! Ended drawing");
                 yield break;
+            } else if(targetTile is Obstacle) {
+                Debug.Log("Intersected Obstacle! Ending drawing");
+                yield break;
             }
 
             yield return null;
