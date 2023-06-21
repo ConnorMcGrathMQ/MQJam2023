@@ -16,7 +16,8 @@ public class PlantPoint: Tile
         distance = maxDist - remainingDist;
     }
 
-    void OnDrawGizmos() {
-        Gizmos.DrawSphere(Board.Instance.GetTile(pos).transform.position, 1);
-    }
+    // void OnDrawGizmos() {
+    //     Gizmos.color = new Color(0, 1, 0, 0.5f);
+    //     Gizmos.DrawSphere(Board.Instance.GetTile(pos).transform.position, 0.25f);
+    // }
 }

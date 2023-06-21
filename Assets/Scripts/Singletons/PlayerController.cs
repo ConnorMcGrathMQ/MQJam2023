@@ -68,6 +68,8 @@ public class PlayerController : MonoBehaviour
         Vector3Int targetCell;
         Plant targetPlant = null;
         Vector2 diff;
+        Tile lastTile = null;
+        bool changedTiles = true;
         while(true) {
             targetCell = Board.Instance.GetComponent<Grid>().WorldToCell(
                     Camera.main.ScreenToWorldPoint(new Vector3(positionAction.ReadValue<Vector2>().x, 
@@ -83,6 +85,10 @@ public class PlayerController : MonoBehaviour
                 targetCell = new Vector3Int(targetCell.x, Board.Instance.gridSize - 1, 0);
             }
             targetTile = Board.Instance.GetTile(targetCell);
+            changedTiles = !lastTile.Equals(targetTile);
+            if(changedTiles) {
+                lastTile = targetTile;
+            }
             // Debug.Log(targetCell);
             // Debug.Log(targetTile);
             // Debug.Log(targetTile.ToString());
@@ -98,7 +104,10 @@ public class PlayerController : MonoBehaviour
                 }
             } else if (targetTile is Empty && Board.Instance.AreAnyAdjacentPlants(targetTile)) {
                 Board.Instance.AddTile(targetPlant, targetTile.pos);
+            } else if (targetTile is Plant && changedTiles) {
+                Debug.Log("Intersected Plant!");
             }
+
             yield return null;
         }
     }
