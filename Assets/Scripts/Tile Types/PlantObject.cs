@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "Plant Object", menuName = "ScriptableObjects/Plant")]
+[CreateAssetMenu(fileName = "Plant Object", menuName = "Recomposition/Plant")]
 public class PlantObject : ScriptableObject
 {
     public PlantType type;

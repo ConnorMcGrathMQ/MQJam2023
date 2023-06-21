@@ -19,38 +19,58 @@ public class Board : MonoBehaviour
     }
 
     private Grid grid;
-    public int gridSize = 15;
+    public int width = 15;
+    public int height = 15;
     public Tile[,] tiles;
     public Tile emptyTilePrefab;
     public PlantPoint pointPrefab;
     public Vector2Int startPoint;
     public Vector2Int endPoint;
 
+    public List<Level> levels;
+    private int currentLevel;
+
+    private int pairsComplete;
+
     void Awake() {
         if(Instance == null) {
             grid = GetComponent<Grid>();
-            tiles = new Tile[gridSize,gridSize];
+            tiles = new Tile[width, height];
             Instance = this;
-            for(int x = 0; x< gridSize; x++) {
-                for(int y = 0; y<gridSize; y++) {
-                    if((startPoint.x == x && startPoint.y == y)|| (endPoint.x == x && endPoint.y == y)) {
-                        AddTile(pointPrefab, new Vector2Int(x, y));
-                    } else {
-                        AddTile(emptyTilePrefab, new Vector2Int(x, y));
-                    }
-                    
-                }
-            }
+            LoadLevel();
         } else {
             Debug.Log("Duplicate boards exist! Destroying...");
         }
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void LoadLevel(int level) {
+        currentLevel = level;
+        LoadLevel();
+    }
+
+    public void LoadLevel() {
+        Level level = levels[currentLevel];
+        for(int x = 0; x< width; x++) {
+            for(int y = 0; y<height; y++) {
+                if(TileIsPoint(x, y, level)) {
+                    AddTile(pointPrefab, new Vector2Int(x, y));
+                } else {
+                    AddTile(emptyTilePrefab, new Vector2Int(x, y));
+                }
+                
+            }
+        }
+    }
+
+    public bool TileIsPoint(int x, int y, Level level) {
+        foreach (Objective o in level.objectives)
+        {
+            if((x == o.firstPointPosition.x && y == o.firstPointPosition.y) || (x == o.secondPointPosition.x && y == o.secondPointPosition.y)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void AddTile(Tile tilePrefab, Vector2Int pos) {
@@ -71,6 +91,9 @@ public class Board : MonoBehaviour
             tiles[pos.x, pos.y] = newTile;
             newTile.pos = pos;
             newTile.gameObject.name = newTile.ToString();
+            if(newTile is PlantPoint point) {
+                point.FindPartner(levels[currentLevel]);
+            }
         }
         if (old != null) {
             Destroy(old.gameObject);
@@ -139,5 +162,13 @@ public class Board : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void PairComplete() {
+        pairsComplete++;
+        Debug.Log("Pair made!");
+        if(pairsComplete == levels[currentLevel].objectives.Count) {
+            Debug.Log("You beat the level!");
+        }
     }
 }

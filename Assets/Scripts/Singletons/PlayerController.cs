@@ -63,34 +63,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void StopDrawing() {
+        if(pressRoutine != null) {
+            StopCoroutine(pressRoutine);
+        }
+    }
+
     private IEnumerator DragMovement() {
         Tile targetTile;
         Vector3Int targetCell;
         Plant targetPlant = null;
         Vector2 diff;
-        Tile lastTile = null;
-        bool drewPlant = false;
-        bool changedTiles = true;
         while(true) {
-            drewPlant = false;
             targetCell = Board.Instance.GetComponent<Grid>().WorldToCell(
                     Camera.main.ScreenToWorldPoint(new Vector3(positionAction.ReadValue<Vector2>().x, 
                         positionAction.ReadValue<Vector2>().y, 0)));
             if(targetCell.x < 0) {
                 targetCell = new Vector3Int(0, targetCell.y, 0);
-            } else if(targetCell.x >= Board.Instance.gridSize) {
-                targetCell = new Vector3Int(Board.Instance.gridSize - 1, targetCell.y, 0);
+            } else if(targetCell.x >= Board.Instance.width) {
+                targetCell = new Vector3Int(Board.Instance.width - 1, targetCell.y, 0);
             }
             if(targetCell.y < 0) {
                 targetCell = new Vector3Int(targetCell.x, 0, 0);
-            } else if(targetCell.y >= Board.Instance.gridSize) {
-                targetCell = new Vector3Int(targetCell.x, Board.Instance.gridSize - 1, 0);
+            } else if(targetCell.y >= Board.Instance.height) {
+                targetCell = new Vector3Int(targetCell.x, Board.Instance.height - 1, 0);
             }
             targetTile = Board.Instance.GetTile(targetCell);
-            changedTiles = !targetTile.Equals(lastTile);
-            if(changedTiles) {
-                lastTile = targetTile;
-            }
             // Debug.Log(targetCell);
             // Debug.Log(targetTile);
             // Debug.Log(targetTile.ToString());
@@ -103,10 +101,12 @@ public class PlayerController : MonoBehaviour
                     targetPlant.species = point.species;
                     targetPlant.pos = point.pos;
                     targetPlant.transform.position = new Vector3(1000, 0, 0);
+                    point.Connected(targetPlant);
                 }
             } else if (targetTile is Empty && Board.Instance.AreAnyAdjacentPlants(targetTile)) {
                 Board.Instance.AddTile(targetPlant, targetTile.pos);
-                drewPlant = true;
+            } else if(targetTile is PlantPoint point) {
+                point.Connected(targetPlant);
             } else if (targetTile is Plant plant && (plant.outDir != Dir.None || !plant.species.Equals(targetPlant.species))) {
                 Debug.Log($"Intersected Plant! Ended drawing");
                 yield break;
