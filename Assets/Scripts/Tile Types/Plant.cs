@@ -23,14 +23,22 @@ public class Plant : Tile
 
     public Plant FindSmallestNeighbour() {
         Tile[] Tiles = Board.Instance.GetAllAdjacentTiles();
-        Plant smallestSoFar = null;
+        List<Plant> plantList = null;
         foreach (Tile t in Tiles)
         {
             if (t is Plant p) {
-                if (p.remainingDist < smallestSoFar.remainingDist) {
-                    smallestSoFar = p;
+                plantList.add(p);
+            }
+        }
+        Plant smallest = null;
+        if (plantList.length >= 1) {
+            smallest = plantList[0];
+            for (int i = 1; i < plantList.length; i++) {
+                if (plantList[i].remainingDist < smallest.remainingDist) {
+                    smallest = plantList[i];
                 }
             }
         }
+        return smallest;
     }
 }
