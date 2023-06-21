@@ -95,7 +95,7 @@ public class Board : MonoBehaviour
         Debug.Log($"Checking {tile.ToString()}'s Adjacent at {dir}");
         switch (dir) {
             case Dir.Up :
-                if(tile.pos.y >= tiles.GetLength(1)) {
+                if(tile.pos.y + 1 >= tiles.GetLength(1)) {
                     return null; // out of bounds
                 }
                 return tiles[tile.pos.x, tile.pos.y + 1];
@@ -112,7 +112,7 @@ public class Board : MonoBehaviour
                 return tiles[tile.pos.x, tile.pos.y - 1];
 
             case Dir.Right :
-                if(tile.pos.x >= tiles.GetLength(0)) {
+                if(tile.pos.x + 1 >= tiles.GetLength(0)) {
                     return null; // out of bounds
                 }
                 return tiles[tile.pos.x + 1, tile.pos.y];
