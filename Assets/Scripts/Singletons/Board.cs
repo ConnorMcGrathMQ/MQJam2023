@@ -92,6 +92,7 @@ public class Board : MonoBehaviour
     }
 
     public Tile GetAdjacentTile(Dir dir, Tile tile) {
+        Debug.Log($"Checking {tile.ToString()}'s Adjacent at {dir}");
         switch (dir) {
             case Dir.Up :
                 if(tile.pos.y >= tiles.GetLength(1)) {
@@ -114,7 +115,7 @@ public class Board : MonoBehaviour
                 if(tile.pos.x >= tiles.GetLength(0)) {
                     return null; // out of bounds
                 }
-                return tiles[tile.pos.x - 1, tile.pos.y];
+                return tiles[tile.pos.x + 1, tile.pos.y];
 
             default :
                 Debug.LogWarning("Invalid Direction passed");
@@ -125,7 +126,7 @@ public class Board : MonoBehaviour
     public Tile[] GetAllAdjacentTiles(Tile tile) {
         Tile[] result = new Tile[4];
         for(int i = 0; i<4; i++) {
-            result[i] = GetAdjacentTile((Dir)i, tile);
+            result[i] = GetAdjacentTile((Dir)(i+1), tile);
         }
         return result;
     }

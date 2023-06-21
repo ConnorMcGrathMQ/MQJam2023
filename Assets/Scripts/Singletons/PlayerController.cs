@@ -93,7 +93,8 @@ public class PlayerController : MonoBehaviour
                 } else if (targetTile is PlantPoint point) {
                     targetPlant = Instantiate(plantPrefab);
                     targetPlant.species = point.species;
-                    targetPlant.pos = new Vector2Int(-1, -1);
+                    targetPlant.pos = point.pos;
+                    targetPlant.transform.position = new Vector3(1000, 0, 0);
                 }
             } else if (targetTile is Empty) {
                 Board.Instance.AddTile(targetPlant, targetTile.pos);
