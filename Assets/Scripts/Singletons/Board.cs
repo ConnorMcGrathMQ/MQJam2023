@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Grid))]
 public class Board : MonoBehaviour
 {
-    private Board instance;
-    public Board Instance
+    private static Board instance;
+    public static Board Instance
     {
         get
         {
