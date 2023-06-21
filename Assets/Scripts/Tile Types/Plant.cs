@@ -14,9 +14,25 @@ public class Plant : Tile
     // Start is called before the first frame update
     void Start()
     {
-        Plant neighbour = FindSmallestNeighbour();
-        remainingDist = neighbour.remainingDist - 1;
-        
+        Plant prev = FindSmallestNeighbour();
+        if (prev.pos.x > this.pos.x) {
+            //Prev on Rightside
+            this.inDir = Dir.Right;
+            prev.outDir = Dir.Left;
+        } else if (prev.pos.x < this.pos.x) {
+            //Prev on Leftside
+            this.inDir = Dir.Left;
+            prev.outDir = Dir.Right;
+        } else if (prev.pos.y > this.pos.y) {
+            //Prev on Top
+            this.inDir = Dir.Up;
+            prev.outDir = Dir.Down;
+        } else if (prev.pos.y < this.pos.y) {
+            //Prev on Bottom
+            this.inDir = Dir.Down;
+            prev.outDir = Dir.Up;
+        }
+        remainingDist = prev.remainingDist - 1;
     }
 
     // Update is called once per frame
