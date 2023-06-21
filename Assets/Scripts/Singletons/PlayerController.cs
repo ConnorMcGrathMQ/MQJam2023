@@ -107,8 +107,9 @@ public class PlayerController : MonoBehaviour
             } else if (targetTile is Empty && Board.Instance.AreAnyAdjacentPlants(targetTile)) {
                 Board.Instance.AddTile(targetPlant, targetTile.pos);
                 drewPlant = true;
-            } else if (targetTile is Plant && changedTiles && !drewPlant) {
-                Debug.Log($"Intersected Plant! New Tile? {changedTiles}");
+            } else if (targetTile is Plant plant && (plant.outDir != Dir.None || !plant.species.Equals(targetPlant.species))) {
+                Debug.Log($"Intersected Plant! Ended drawing");
+                yield break;
             }
 
             yield return null;
