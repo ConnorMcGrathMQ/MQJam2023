@@ -61,78 +61,98 @@ public class Plant : Tile
         }
         switch (inDir)
         {
-            Dir.Left:
+            case Dir.Left:
                 switch (outDir)
                 {
-                    Dir.Left:
+                    case Dir.Left:
                         //Cannot lead to self
-                    Dir.Right:
+                        break;
+                    case Dir.Right:
                         //Rot -90
                         spriteRenderer.sprite = species.straightSprite;
                         transform.rotation.eulerAngles = new Vector3(0, 0, -90);
-                    Dir.Up:
+                        break;
+                    case Dir.Up:
                         //Rot 90
                         spriteRenderer.sprite = species.cornerSprite;
                         transform.rotation.eulerAngles = new Vector3(0, 0, 90);
-                    Dir.Down:
+                        break;
+                    case Dir.Down:
                         //Rot -90 Flip X
                         spriteRenderer.sprite = species.cornerSprite;
                         transform.rotation.eulerAngles = new Vector3(0, 0, -90);
                         spriteRenderer.flipX = true;
+                        break;
                 }
-            Dir.Right:
+                break;
+            case Dir.Right:
                 switch (outDir)
                 {
-                    Dir.Left:
+                    case Dir.Left:
                         //Rot +90
                         spriteRenderer.sprite = species.straightSprite;
                         transform.rotation.eulerAngles = new Vector3(0, 0, 90);
-                    Dir.Right:
+                        break;
+                    case Dir.Right:
                         //Cannot lead to self
-                    Dir.Up:
+                        break;
+                    case Dir.Up:
                         //Rot -90
                         spriteRenderer.sprite = species.cornerSprite;
                         transform.rotation.eulerAngles = new Vector3(0, 0, -90);
-                    Dir.Down:
+                        break;
+                    case Dir.Down:
                         //Rot +90
                         spriteRenderer.sprite = species.cornerSprite;
                         transform.rotation.eulerAngles = new Vector3(0, 0, 90);
+                        break;
                 }
-            Dir.Up:
+                break;
+            case Dir.Up:
                 switch (outDir)
                 {
-                    Dir.Left:
+                    case Dir.Left:
                         //Rot 180 and Flip X
                         spriteRenderer.sprite = species.cornerSprite;
                         transform.rotation.eulerAngles = new Vector3(0, 0, 180);
                         spriteRenderer.flipX = true;
-                    Dir.Right:
+                        break;
+                    case Dir.Right:
                         //Rot 180
                         spriteRenderer.sprite = species.cornerSprite;
                         transform.rotation.eulerAngles = new Vector3(0, 0, 180);
-                    Dir.Up:
+                        break;
+                    case Dir.Up:
                         //Cannot lead to self
-                    Dir.Down:
+                        break;
+                    case Dir.Down:
                         //Rot 180
                         spriteRenderer.sprite = species.straightSprite;
                         transform.rotation.eulerAngles = new Vector3(0, 0, 180);
+                        break;
                 }
-            Dir.Down:
+                break;
+            case Dir.Down:
                 switch (outDir)
                 {
-                    Dir.Left:
+                    case Dir.Left:
                         //Default
                         spriteRenderer.sprite = species.cornerSprite;
-                    Dir.Right:
+                        break;
+                    case Dir.Right:
                         //Flip X
                         spriteRenderer.sprite = species.cornerSprite;
                         spriteRenderer.flipX = true;
-                    Dir.Up:
+                        break;
+                    case Dir.Up:
                         //Default
                         spriteRenderer.sprite = species.straightSprite;
-                    Dir.Down:
+                        break;
+                    case Dir.Down:
                         //Cannot lead to self
+                        break;
                 }
+                break;
         }
     }
 
