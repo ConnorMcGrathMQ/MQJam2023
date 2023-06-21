@@ -19,13 +19,20 @@ public class Board : MonoBehaviour
     }
 
     private Grid grid;
-    public static int GridSize = 15;
-    public Tile[,] tiles = new Tile[GridSize,GridSize];
+    public int gridSize = 15;
+    public Tile[,] tiles;
+    public Tile emptyTilePrefab;
 
     void Awake() {
         if(Instance == null) {
             grid = GetComponent<Grid>();
+            tiles = new Tile[gridSize,gridSize];
             Instance = this;
+            for(int x = 0; x< gridSize; x++) {
+                for(int y = 0; y<gridSize; y++) {
+                    AddTile(emptyTilePrefab, new Vector2Int(x, y));
+                }
+            }
         } else {
             Debug.Log("Duplicate boards exist! Destroying...");
         }
@@ -52,7 +59,8 @@ public class Board : MonoBehaviour
             newTile = Instantiate(tilePrefab, grid.GetCellCenterWorld(new Vector3Int(pos.x, pos.y, 0)), 
                 Quaternion.identity, this.transform);
             old = location;
-            location = newTile;
+            tiles[pos.x, pos.y] = newTile;
+            newTile.pos = pos;
         }
         if (old != null) {
             Destroy(old.gameObject);
@@ -64,6 +72,10 @@ public class Board : MonoBehaviour
     }
     
     public Tile GetTile(Vector2Int target) {
+        return tiles[target.x, target.y];
+    }
+
+    public Tile GetTile(Vector3Int target) {
         return tiles[target.x, target.y];
     }
 

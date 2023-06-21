@@ -61,8 +61,27 @@ public class PlayerController : MonoBehaviour
     }
 
     private IEnumerator DragMovement() {
+        Tile targetTile;
+        Vector3Int targetCell;
         while(true) {
-            Debug.Log("Pressing!");
+            // targetTile = 
+            targetCell = Board.Instance.GetComponent<Grid>().WorldToCell(
+                    Camera.main.ScreenToWorldPoint(new Vector3(positionAction.ReadValue<Vector2>().x, 
+                        positionAction.ReadValue<Vector2>().y, 0)));
+            if(targetCell.x < 0) {
+                targetCell = new Vector3Int(0, targetCell.y, 0);
+            } else if(targetCell.x >= Board.Instance.gridSize) {
+                targetCell = new Vector3Int(Board.Instance.gridSize - 1, targetCell.y, 0);
+            }
+            if(targetCell.y < 0) {
+                targetCell = new Vector3Int(targetCell.x, 0, 0);
+            } else if(targetCell.y >= Board.Instance.gridSize) {
+                targetCell = new Vector3Int(targetCell.x, Board.Instance.gridSize - 1, 0);
+            }
+            targetTile = Board.Instance.GetTile(targetCell);
+            Debug.Log(targetCell);
+            Debug.Log(targetTile);
+            Debug.Log(targetTile.ToString());
             yield return null;
         }
     }
@@ -87,10 +106,10 @@ public class PlayerController : MonoBehaviour
     }
 
     // void Update() {
-    //     Debug.Log(pressAction.ReadValue<float>());
+    //     Debug.Log(Mouse.current.leftButton.isPressed);
     // }
 
-    void OnPress() {
-        Debug.Log("Pressed!");
-    }
+    // void OnPress() {
+    //     Debug.Log("Pressed!");
+    // }
 }

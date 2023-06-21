@@ -22,4 +22,11 @@ public class Tile : MonoBehaviour
     public void ChangePosition(Vector2Int newPos) {
         pos = newPos;
     }
+
+    public override string ToString() {
+        if(pos == null) {
+            return $"Tile (Undefined)";
+        }
+        return $"Tile ({pos.x}, {pos.y})";
+    }
 }
