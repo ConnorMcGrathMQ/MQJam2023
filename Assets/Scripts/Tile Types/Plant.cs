@@ -11,6 +11,9 @@ public class Plant : Tile
 
     public Dir inDir;
     public Dir outDir = Dir.None;
+    public Plant prev;
+    public Plant next;
+    public int identifier;
 
     public SpriteRenderer spriteRenderer;
 
@@ -19,8 +22,11 @@ public class Plant : Tile
     {
         if (spriteRenderer == null) {
             spriteRenderer = GetComponent<SpriteRenderer>();
-        }
-        Plant prev = FindSmallestNeighbour();
+        } 
+        prev = null;
+        next = null;
+        prev = FindSmallestNeighbour();
+        
         if (prev != null) {
             if (prev.pos.x > this.pos.x) {
                 //Prev on Rightside
@@ -41,20 +47,18 @@ public class Plant : Tile
             }
             remainingDist = prev.remainingDist - 1;
             prev.UpdateSprite();
+            prev.next = this;
+            // if(prev == next) {
+            //     next = null;
+            // }
         } else {
             //PLANT START POINT STUFF GOES HERE
         }
         UpdateSprite();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void UpdateSprite() {
-        spriteRenderer.color = species.colorList[0].vineColour;
+        spriteRenderer.color = species.colorList[identifier].vineColour;
         transform.eulerAngles = new Vector3(0, 0, 0);
         spriteRenderer.flipX = false;
         switch (inDir)
@@ -196,7 +200,8 @@ public class Plant : Tile
         foreach (Tile t in Tiles)
         {
             if (t is Plant p) {
-                if (p.species == this.species) {
+                if (p.species == this.species && p.identifier == this.identifier) {
+                    Debug.Log("Found plant at "+p);
                     plantList.Add(p);
                 }
             }

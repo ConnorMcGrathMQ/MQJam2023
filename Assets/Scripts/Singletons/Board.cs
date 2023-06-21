@@ -58,9 +58,11 @@ public class Board : MonoBehaviour
                 } else {
                     AddTile(emptyTilePrefab, new Vector2Int(x, y));
                 }
-                
             }
         }
+    }
+    public Level GetCurrentLevel() {
+        return levels[currentLevel];
     }
 
     public bool TileIsPoint(int x, int y, Level level) {
@@ -115,7 +117,7 @@ public class Board : MonoBehaviour
     }
 
     public Tile GetAdjacentTile(Dir dir, Tile tile) {
-        Debug.Log($"Checking {tile.ToString()}'s Adjacent at {dir}");
+        // Debug.Log($"Checking {tile.ToString()}'s Adjacent at {dir}");
         switch (dir) {
             case Dir.Up :
                 if(tile.pos.y + 1 >= tiles.GetLength(1)) {

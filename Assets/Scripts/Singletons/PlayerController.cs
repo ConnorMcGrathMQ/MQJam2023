@@ -27,6 +27,10 @@ public class PlayerController : MonoBehaviour
     private PlantObject targetPlant;
     public Plant plantPrefab;
 
+    public Tile targetTile;
+
+    private int plantsDrawn;
+
     void Awake() {
         if(PlayerController.Instance == null) {
             PlayerController.Instance = this;
@@ -70,7 +74,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private IEnumerator DragMovement() {
-        Tile targetTile;
+        // Tile targetTile;
         Vector3Int targetCell;
         Plant targetPlant = null;
         Vector2 diff;
@@ -96,24 +100,32 @@ public class PlayerController : MonoBehaviour
             if(targetPlant == null) {
                 if(targetTile is Plant p) {
                     targetPlant = p;
-                } else if (targetTile is PlantPoint point) {
+                } else if (targetTile is PlantPoint point && plantsDrawn < Board.Instance.GetCurrentLevel().plants.Count) {
                     targetPlant = Instantiate(plantPrefab);
                     targetPlant.species = point.species;
                     targetPlant.pos = point.pos;
                     targetPlant.transform.position = new Vector3(1000, 0, 0);
                     point.Connected(targetPlant);
+                    targetPlant.remainingDist = targetPlant.species.maxLength;
+                    targetPlant.identifier = plantsDrawn;
+                    plantsDrawn++;
                 }
             } else if (targetTile is Empty && Board.Instance.AreAnyAdjacentPlants(targetTile)) {
+                Debug.Log("Added Plant to "+targetTile);
                 Board.Instance.AddTile(targetPlant, targetTile.pos);
             } else if(targetTile is PlantPoint point) {
                 point.Connected(targetPlant);
-            } else if (targetTile is Plant plant && (plant.outDir != Dir.None || !plant.species.Equals(targetPlant.species))) {
+            } else if (targetTile is Plant plant && (plant.next != null || !plant.species.Equals(targetPlant.species))) {
                 Debug.Log($"Intersected Plant! Ended drawing");
                 yield break;
             } else if(targetTile is Obstacle) {
                 Debug.Log("Intersected Obstacle! Ending drawing");
                 yield break;
             }
+            // } else {
+            //     Debug.Log("Stop!");
+            //     yield break;
+            // }
 
             yield return null;
         }
