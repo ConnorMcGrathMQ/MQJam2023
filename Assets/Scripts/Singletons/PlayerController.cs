@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     private InputAction positionAction;
     private Coroutine pressRoutine;
 
+    private PlantObject targetPlant;
+    public Plant plantPrefab;
+
     void Awake() {
         if(PlayerController.Instance == null) {
             PlayerController.Instance = this;
@@ -64,6 +67,7 @@ public class PlayerController : MonoBehaviour
         Tile targetTile;
         Vector3Int targetCell;
         Plant targetPlant = null;
+        Vector2 diff;
         while(true) {
             targetCell = Board.Instance.GetComponent<Grid>().WorldToCell(
                     Camera.main.ScreenToWorldPoint(new Vector3(positionAction.ReadValue<Vector2>().x, 
@@ -82,11 +86,17 @@ public class PlayerController : MonoBehaviour
             Debug.Log(targetCell);
             Debug.Log(targetTile);
             Debug.Log(targetTile.ToString());
+            // diff = ClampVector(dragAction.ReadValue<Vector2>());
             if(targetPlant == null) {
-
-            }
-            if(targetTile is Plant p) {
-                targetPlant = p;
+                if(targetTile is Plant p) {
+                    targetPlant = p;
+                } else if (targetTile is PlantPoint point) {
+                    targetPlant = Instantiate(plantPrefab);
+                    targetPlant.species = point.species;
+                    targetPlant.pos = new Vector2Int(-1, -1);
+                }
+            } else if (targetTile is Empty) {
+                Board.Instance.AddTile(targetPlant, targetTile.pos);
             }
             yield return null;
         }

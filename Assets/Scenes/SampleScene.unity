@@ -154,7 +154,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: 15
-  emptyTilePrefab: {fileID: 1573259118614960675, guid: e88fa8b127496954ea70211e69d81a37, type: 3}
+  emptyTilePrefab: {fileID: 7945498252373563711, guid: e88fa8b127496954ea70211e69d81a37, type: 3}
+  pointPrefab: {fileID: 0}
+  startPoint: {x: 3, y: 14}
+  endPoint: {x: 12, y: 2}
 --- !u!156049354 &121731297
 Grid:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ public class PlantPoint: Tile
 {
     private bool connected;
     private int distance;
-    public PlantType species;
+    public PlantObject species;
 
     void Start() {
         connected = false;

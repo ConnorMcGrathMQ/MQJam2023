@@ -22,6 +22,9 @@ public class Board : MonoBehaviour
     public int gridSize = 15;
     public Tile[,] tiles;
     public Tile emptyTilePrefab;
+    public PlantPoint pointPrefab;
+    public Vector2Int startPoint;
+    public Vector2Int endPoint;
 
     void Awake() {
         if(Instance == null) {
@@ -30,7 +33,12 @@ public class Board : MonoBehaviour
             Instance = this;
             for(int x = 0; x< gridSize; x++) {
                 for(int y = 0; y<gridSize; y++) {
-                    AddTile(emptyTilePrefab, new Vector2Int(x, y));
+                    if((startPoint.x == x && startPoint.y == y)|| (endPoint.x == x && endPoint.y == y)) {
+                        AddTile(pointPrefab, new Vector2Int(x, y));
+                    } else {
+                        AddTile(emptyTilePrefab, new Vector2Int(x, y));
+                    }
+                    
                 }
             }
         } else {
