@@ -53,8 +53,8 @@ public class Plant : Tile
     }
 
     public void UpdateSprite() {
-        spriteRenderer.color = species.vineColour;
-        transform.rotation.eulerAngles = new Vector3(0, 0, 0);
+        spriteRenderer.color = species.colorList[0].vineColour;
+        transform.eulerAngles = new Vector3(0, 0, 0);
         spriteRenderer.flipX = false;
         if (outDir == Dir.None) {
             spriteRenderer.sprite = species.endSprite;
@@ -70,17 +70,17 @@ public class Plant : Tile
                     case Dir.Right:
                         //Rot -90
                         spriteRenderer.sprite = species.straightSprite;
-                        transform.rotation.eulerAngles = new Vector3(0, 0, -90);
+                        transform.eulerAngles = new Vector3(0, 0, -90);
                         break;
                     case Dir.Up:
                         //Rot 90
                         spriteRenderer.sprite = species.cornerSprite;
-                        transform.rotation.eulerAngles = new Vector3(0, 0, 90);
+                        transform.eulerAngles = new Vector3(0, 0, 90);
                         break;
                     case Dir.Down:
                         //Rot -90 Flip X
                         spriteRenderer.sprite = species.cornerSprite;
-                        transform.rotation.eulerAngles = new Vector3(0, 0, -90);
+                        transform.eulerAngles = new Vector3(0, 0, -90);
                         spriteRenderer.flipX = true;
                         break;
                 }
@@ -91,7 +91,7 @@ public class Plant : Tile
                     case Dir.Left:
                         //Rot +90
                         spriteRenderer.sprite = species.straightSprite;
-                        transform.rotation.eulerAngles = new Vector3(0, 0, 90);
+                        transform.eulerAngles = new Vector3(0, 0, 90);
                         break;
                     case Dir.Right:
                         //Cannot lead to self
@@ -99,12 +99,12 @@ public class Plant : Tile
                     case Dir.Up:
                         //Rot -90
                         spriteRenderer.sprite = species.cornerSprite;
-                        transform.rotation.eulerAngles = new Vector3(0, 0, -90);
+                        transform.eulerAngles = new Vector3(0, 0, -90);
                         break;
                     case Dir.Down:
                         //Rot +90
                         spriteRenderer.sprite = species.cornerSprite;
-                        transform.rotation.eulerAngles = new Vector3(0, 0, 90);
+                        transform.eulerAngles = new Vector3(0, 0, 90);
                         break;
                 }
                 break;
@@ -114,13 +114,13 @@ public class Plant : Tile
                     case Dir.Left:
                         //Rot 180 and Flip X
                         spriteRenderer.sprite = species.cornerSprite;
-                        transform.rotation.eulerAngles = new Vector3(0, 0, 180);
+                        transform.eulerAngles = new Vector3(0, 0, 180);
                         spriteRenderer.flipX = true;
                         break;
                     case Dir.Right:
                         //Rot 180
                         spriteRenderer.sprite = species.cornerSprite;
-                        transform.rotation.eulerAngles = new Vector3(0, 0, 180);
+                        transform.eulerAngles = new Vector3(0, 0, 180);
                         break;
                     case Dir.Up:
                         //Cannot lead to self
@@ -128,7 +128,7 @@ public class Plant : Tile
                     case Dir.Down:
                         //Rot 180
                         spriteRenderer.sprite = species.straightSprite;
-                        transform.rotation.eulerAngles = new Vector3(0, 0, 180);
+                        transform.eulerAngles = new Vector3(0, 0, 180);
                         break;
                 }
                 break;
