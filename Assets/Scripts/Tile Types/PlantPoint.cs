@@ -1,8 +1,10 @@
+using UnityEngine;
+
 public class PlantPoint: Tile
 {
     private bool connected;
     private int distance;
-    public PlantType species;
+    public PlantObject species;
 
     void Start() {
         connected = false;
@@ -12,5 +14,9 @@ public class PlantPoint: Tile
     public void Connect(int remainingDist, int maxDist) {
         connected = true;
         distance = maxDist - remainingDist;
+    }
+
+    void OnDrawGizmos() {
+        Gizmos.DrawSphere(Board.Instance.GetTile(pos).transform.position, 1);
     }
 }

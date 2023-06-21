@@ -22,6 +22,9 @@ public class Board : MonoBehaviour
     public int gridSize = 15;
     public Tile[,] tiles;
     public Tile emptyTilePrefab;
+    public PlantPoint pointPrefab;
+    public Vector2Int startPoint;
+    public Vector2Int endPoint;
 
     void Awake() {
         if(Instance == null) {
@@ -30,7 +33,12 @@ public class Board : MonoBehaviour
             Instance = this;
             for(int x = 0; x< gridSize; x++) {
                 for(int y = 0; y<gridSize; y++) {
-                    AddTile(emptyTilePrefab, new Vector2Int(x, y));
+                    if((startPoint.x == x && startPoint.y == y)|| (endPoint.x == x && endPoint.y == y)) {
+                        AddTile(pointPrefab, new Vector2Int(x, y));
+                    } else {
+                        AddTile(emptyTilePrefab, new Vector2Int(x, y));
+                    }
+                    
                 }
             }
         } else {
@@ -53,7 +61,8 @@ public class Board : MonoBehaviour
         Tile location = tiles[pos.x,pos.y];
         Tile old = null;
         Tile newTile = null;
-        if (location != null && replace == false) {
+        if (location != null && !(location is Empty) && replace == false) {
+            // Debug.Log($"{location.ToString()} Is Null! Hahah");
             return;
         } else {
             newTile = Instantiate(tilePrefab, grid.GetCellCenterWorld(new Vector3Int(pos.x, pos.y, 0)), 
@@ -61,8 +70,11 @@ public class Board : MonoBehaviour
             old = location;
             tiles[pos.x, pos.y] = newTile;
             newTile.pos = pos;
+            newTile.gameObject.name = newTile.ToString();
         }
         if (old != null) {
+            Destroy(old.gameObject);
+        } else if (old != null && !(old is Empty)) {
             Destroy(old.gameObject);
         }
     }
@@ -80,6 +92,7 @@ public class Board : MonoBehaviour
     }
 
     public Tile GetAdjacentTile(Dir dir, Tile tile) {
+        Debug.Log($"Checking {tile.ToString()}'s Adjacent at {dir}");
         switch (dir) {
             case Dir.Up :
                 if(tile.pos.y >= tiles.GetLength(1)) {
@@ -102,7 +115,7 @@ public class Board : MonoBehaviour
                 if(tile.pos.x >= tiles.GetLength(0)) {
                     return null; // out of bounds
                 }
-                return tiles[tile.pos.x - 1, tile.pos.y];
+                return tiles[tile.pos.x + 1, tile.pos.y];
 
             default :
                 Debug.LogWarning("Invalid Direction passed");
@@ -113,7 +126,7 @@ public class Board : MonoBehaviour
     public Tile[] GetAllAdjacentTiles(Tile tile) {
         Tile[] result = new Tile[4];
         for(int i = 0; i<4; i++) {
-            result[i] = GetAdjacentTile((Dir)i, tile);
+            result[i] = GetAdjacentTile((Dir)(i+1), tile);
         }
         return result;
     }

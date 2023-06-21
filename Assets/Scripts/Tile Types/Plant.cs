@@ -159,7 +159,7 @@ public class Plant : Tile
 
     public Plant FindSmallestNeighbour() {
         Tile[] Tiles = Board.Instance.GetAllAdjacentTiles((Tile)this);
-        List<Plant> plantList = null;
+        List<Plant> plantList = new List<Plant>();
         foreach (Tile t in Tiles)
         {
             if (t is Plant p) {

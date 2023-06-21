@@ -154,7 +154,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: 15
-  emptyTilePrefab: {fileID: 1573259118614960675, guid: e88fa8b127496954ea70211e69d81a37, type: 3}
+  emptyTilePrefab: {fileID: 7945498252373563711, guid: e88fa8b127496954ea70211e69d81a37, type: 3}
+  pointPrefab: {fileID: -2938556676173665149, guid: c11b4203cee48704b9afe35728e96020, type: 3}
+  startPoint: {x: 3, y: 14}
+  endPoint: {x: 12, y: 2}
 --- !u!156049354 &121731297
 Grid:
   m_ObjectHideFlags: 0
@@ -471,6 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 377d7efa1efa3fd45b71152dbdf6c273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantPrefab: {fileID: 584243002301263685, guid: 015c40d7c27f71f46927626ee223f87f, type: 3}
 --- !u!4 &772529355
 Transform:
   m_ObjectHideFlags: 0
