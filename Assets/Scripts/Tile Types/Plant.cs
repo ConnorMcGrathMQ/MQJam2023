@@ -40,6 +40,7 @@ public class Plant : Tile
                 prev.outDir = Dir.Up;
             }
             remainingDist = prev.remainingDist - 1;
+            prev.UpdateSprite();
         } else {
             //PLANT START POINT STUFF GOES HERE
         }
