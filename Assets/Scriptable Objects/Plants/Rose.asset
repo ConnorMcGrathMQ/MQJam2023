@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rose
   m_EditorClassIdentifier: 
   type: 1
-  maxLength: 3
+  maxLength: 9999
   effectSpace: 0
   straightSprite: {fileID: 21300000, guid: 65f4f239f1f336d488851539d9d8742b, type: 3}
   cornerSprite: {fileID: 21300000, guid: 67af973aa02bf764ea9298d388e5110c, type: 3}
