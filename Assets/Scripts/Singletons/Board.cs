@@ -27,6 +27,7 @@ public class Board : MonoBehaviour
     public Tile obstaclePrefab;
     public Obstacle thornPrefab;
     public ParticleSystem energyParticles;
+    public Tile lastTileCreated;
 
     public List<Level> levels;
     private int currentLevel;
@@ -106,6 +107,7 @@ public class Board : MonoBehaviour
         tiles[pos.x, pos.y] = newTile;
         newTile.pos = pos;
         newTile.gameObject.name = newTile.ToString();
+        lastTileCreated = newTile;
         if(newTile is PlantPoint point) {
             point.FindPartner(levels[currentLevel]);
         }
@@ -199,6 +201,9 @@ public class Board : MonoBehaviour
 
     public void PairComplete() {
         pairsComplete++;
+        if(lastTileCreated is Plant p) {
+            p.EnableParticles();
+        }
         Debug.Log("Pair Complete!");
         if(pairsComplete == levels[currentLevel].objectives.Count) {
             currentLevel++;

@@ -295,4 +295,20 @@ public class Plant : Tile
             prev.next = null;
         }
     }
+
+    public void EnableParticles() {
+        GetComponent<ParticleSystem>().Play();
+        GetComponent<ParticleSystemRenderer>().material = species.particleMaterial;
+        Debug.Log($"{this} particles were turned on!");
+        if(prev != null) {
+            prev.EnableParticles();
+        }
+    }
+
+    public void DisableParticles() {
+        GetComponent<ParticleSystem>().Stop();
+        if(next != null) {
+            next.EnableParticles();
+        }
+    }
 }

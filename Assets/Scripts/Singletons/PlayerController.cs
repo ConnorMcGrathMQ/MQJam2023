@@ -130,6 +130,7 @@ public class PlayerController : MonoBehaviour
                     Board.Instance.AddTile(targetPlant, targetTile.pos);
                 } else if(targetTile is PlantPoint point && targetPlant.connector.partner.Equals(point)) {
                     point.Connected(targetPlant);
+                    targetPlant.EnableParticles();
                 } else if (targetTile is Plant plant && (plant.next != null || !plant.species.Equals(targetPlant.species))) {
                     Debug.Log($"Intersected Plant! Ended drawing");
                     yield break;

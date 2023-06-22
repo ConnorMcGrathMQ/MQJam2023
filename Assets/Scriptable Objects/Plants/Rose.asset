@@ -19,6 +19,7 @@ MonoBehaviour:
   cornerSprite: {fileID: 21300000, guid: 67af973aa02bf764ea9298d388e5110c, type: 3}
   startSprite: {fileID: 21300000, guid: f2b84c1c1a27c447b86e06da5aac565b, type: 3}
   endSprite: {fileID: 21300000, guid: 23c302bd2d8d44601a76e0ffc4c9ac7f, type: 3}
+  particleMaterial: {fileID: 2100000, guid: 939dd0a0a2ba94cfbb30e76df5f95589, type: 2}
   colorList:
   - vineColour: {r: 1, g: 1, b: 1, a: 1}
     highlightColour: {r: 1, g: 0, b: 0, a: 1}
