@@ -36,6 +36,8 @@ public class UIManager : MonoBehaviour
 
     public TextMeshProUGUI boardFilledText;
 
+    public GameObject stars;
+
     void Awake() {
         if(UIManager.Instance == null) {
             Instance = this;
@@ -97,6 +99,12 @@ public class UIManager : MonoBehaviour
         levelComplete.gameObject.SetActive(true);
         completionText.text = $"Level {Board.Instance.CurrentLevel} Complete!";
         boardFilledText.text = $"Filled {Board.Instance.GetFilledPercent()}% of the Board!";
+        if (Board.Instance.GetFilledPercent() > 33f) {
+            stars.transform.GetChild(1).GetComponent<Image>().color = new Color(1f,1f,1f);
+        } 
+        if (Board.Instance.GetFilledPercent() > 67f) {
+            stars.transform.GetChild(2).GetComponent<Image>().color = new Color(1f,1f,1f);
+        }
     }
 
     public void CloseLevelComplete() {
