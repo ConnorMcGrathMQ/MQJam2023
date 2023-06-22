@@ -31,6 +31,13 @@ public class Board : MonoBehaviour
 
     public List<Level> levels;
     private int currentLevel;
+    public int CurrentLevel
+    {
+        get
+        {
+            return currentLevel;
+        }
+    }
     private int pairsComplete;
     public PlantObject roseType;
 
@@ -39,11 +46,14 @@ public class Board : MonoBehaviour
             grid = GetComponent<Grid>();
             tiles = new Tile[width, height];
             Instance = this;
-            LoadLevel();
         } else {
             Debug.Log("Duplicate boards exist! Destroying...");
         }
 
+    }
+
+    void Start() {
+        LoadLevel();
     }
 
     public void LoadLevel(int level) {
@@ -52,6 +62,8 @@ public class Board : MonoBehaviour
     }
 
     public void LoadLevel() {
+        PlayerController.Instance.plantsDrawn = 0;
+        pairsComplete = 0;
         Level level = levels[currentLevel];
         for(int x = 0; x< width; x++) {
             for(int y = 0; y<height; y++) {
@@ -183,9 +195,21 @@ public class Board : MonoBehaviour
 
     public void PairComplete() {
         pairsComplete++;
-        Debug.Log("Pair made!");
         if(pairsComplete == levels[currentLevel].objectives.Count) {
-            Debug.Log("You beat the level!");
+            currentLevel++;
+            UIManager.Instance.OpenLevelComplete();
         }
+    }
+
+    public float GetFilledPercent() {
+        int amountFilled = 0;
+        for(int x = 0; x<width; x++) {
+            for(int y = 0; y<height; y++) {
+                if(!(GetTile(x, y) is Empty)) {
+                    amountFilled++;
+                }
+            }
+        }
+        return (float)amountFilled / (float)(height * width) * 100;
     }
 }
