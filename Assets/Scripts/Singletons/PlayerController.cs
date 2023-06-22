@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
             // Debug.Log(targetTile.ToString());
             // diff = ClampVector(dragAction.ReadValue<Vector2>());
             if(targetPlant == null) {
-                if(targetTile is Plant p) {
+                if(targetTile is Plant p && p.remainingDist > 0) {
                     targetPlant = p;
                 } else if (targetTile is PlantPoint point && plantsDrawn < Board.Instance.GetCurrentLevel().plants.Count) {
                     targetPlant = Instantiate(plantPrefab);

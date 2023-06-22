@@ -46,6 +46,9 @@ public class Plant : Tile
                 prev.outDir = Dir.Up;
             }
             remainingDist = prev.remainingDist - 1;
+            if(remainingDist == 0) {
+                PlayerController.Instance.StopDrawing();
+            }
             prev.UpdateSprite();
             prev.next = this;
             // if(prev == next) {
