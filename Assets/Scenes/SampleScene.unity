@@ -160,6 +160,7 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 7424272576105095094, guid: 43b1a32a2f59b7642b90f88c76273b4b, type: 3}
   thornPrefab: {fileID: 7424272576105095094, guid: 4f2fcb158deaf479c93f5aeb18777db0, type: 3}
   energyParticles: {fileID: 6577445876040317407, guid: 9c0672f7592df410ba29d2b9ffd08821, type: 3}
+  lastTileCreated: {fileID: 0}
   levels:
   - {fileID: 11400000, guid: affdeb65cf30844d5a779742cc7adc70, type: 2}
   - {fileID: 11400000, guid: ba569919ca7ff47039b97627c8efffcd, type: 2}
@@ -1185,9 +1186,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 539765389}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.5584, y: 5.0064, z: 0}
-  m_LocalScale: {x: 1.2909684, y: 0.9793567, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 5.6296, y: 4.671, z: 0}
+  m_LocalScale: {x: 1.1980654, y: 0.9346001, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7

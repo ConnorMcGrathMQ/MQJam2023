@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plants:
   - {fileID: 11400000, guid: 2aa69a14a68c0be4cbc4d964b17bc995, type: 2}
-  - {fileID: 11400000, guid: 2aa69a14a68c0be4cbc4d964b17bc995, type: 2}
-  - {fileID: 11400000, guid: 2aa69a14a68c0be4cbc4d964b17bc995, type: 2}
+  - {fileID: 11400000, guid: 88e9a666d53e9a647b6a77cc32b38c8e, type: 2}
+  - {fileID: 11400000, guid: 88e9a666d53e9a647b6a77cc32b38c8e, type: 2}
   - {fileID: 11400000, guid: 2aa69a14a68c0be4cbc4d964b17bc995, type: 2}
   objectives:
   - firstPointPosition: {x: 3, y: 7}
-    secondPointPosition: {x: 9, y: 2}
+    secondPointPosition: {x: 9, y: 7}
     pairColour: {r: 0.40899786, g: 0.6670557, b: 0.9528302, a: 1}
   - firstPointPosition: {x: 8, y: 9}
     secondPointPosition: {x: 1, y: 1}
@@ -30,4 +30,11 @@ MonoBehaviour:
   - firstPointPosition: {x: 3, y: 3}
     secondPointPosition: {x: 9, y: 0}
     pairColour: {r: 0.98039216, g: 0.9200311, b: 0.25490195, a: 1}
-  obstacles: []
+  obstacles:
+  - {x: 4, y: 2}
+  - {x: 8, y: 6}
+  - {x: 4, y: 6}
+  - {x: 3, y: 1}
+  - {x: 5, y: 7}
+  - {x: 5, y: 8}
+  - {x: 5, y: 6}
