@@ -26,8 +26,7 @@ public class Board : MonoBehaviour
     public PlantPoint pointPrefab;
     public Tile obstaclePrefab;
     public Obstacle thornPrefab;
-    public Vector2Int startPoint;
-    public Vector2Int endPoint;
+    public ParticleSystem energyParticles;
 
     public List<Level> levels;
     private int currentLevel;
@@ -184,17 +183,23 @@ public class Board : MonoBehaviour
         Plant originalPrev = target.prev;
         while(target != null) {
             nextPlant = target.next;
-            if(target.assistTile != null) {
-                AddTile(emptyTilePrefab, target.assistTile.pos);
-            }
-            AddTile(emptyTilePrefab, target.pos);
-            target = nextPlant;
+            if(target.prev == null) {
+                Debug.Log("Is original, skipping...");
+                target = nextPlant;
+            } else {
+                if(target.assistTile != null) {
+                    AddTile(emptyTilePrefab, target.assistTile.pos);
+                }
+                AddTile(emptyTilePrefab, target.pos);
+                target = nextPlant;
+            }   
         }
         originalPrev.UpdateSprite();
     }
 
     public void PairComplete() {
         pairsComplete++;
+        Debug.Log("Pair Complete!");
         if(pairsComplete == levels[currentLevel].objectives.Count) {
             currentLevel++;
             UIManager.Instance.OpenLevelComplete();
@@ -211,5 +216,22 @@ public class Board : MonoBehaviour
             }
         }
         return (float)amountFilled / (float)(height * width) * 100;
+    }
+
+    public bool AreAdjacent(Tile a, Tile b) {
+        if(Mathf.Abs(a.pos.x - b.pos.x) == 1 && a.pos.y.Equals(b.pos.y)) {
+            return true;
+        } else if(Mathf.Abs(a.pos.y - b.pos.y) == 1 && a.pos.x.Equals(b.pos.x)) {
+            return true;
+        } 
+        return false;
+    }
+
+    public void CreateEnergyEffect(Plant origin) {
+        ParticleSystem particles = Instantiate(energyParticles);
+        particles.transform.SetParent(origin.transform);
+        particles.transform.localPosition = Vector3.zero;
+        var main = particles.main;
+        main.startColor = origin.connector.GetComponent<SpriteRenderer>().color;
     }
 }

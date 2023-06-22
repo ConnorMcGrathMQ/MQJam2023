@@ -19,7 +19,9 @@ public class UIManager : MonoBehaviour
         }
     }
     public Image drawButton;
+    public Image drawText;
     public Image eraseButton;
+    public Image eraseText;
     public Image textContainer;
     public TextMeshProUGUI lengthText;
     
@@ -28,7 +30,7 @@ public class UIManager : MonoBehaviour
     public AnimationCurve fadeOutCurve;
     public float fadeOutDuration = 1;
 
-    private Coroutine fadingRoutine;
+    public Coroutine fadingRoutine;
     public Image levelComplete;
     public TextMeshProUGUI completionText;
 
@@ -47,7 +49,9 @@ public class UIManager : MonoBehaviour
     public void SetDrawingMode() {
         PlayerController.Instance.erasing = false;
         drawButton.color = activeButtonColour;
+        drawText.color = activeButtonColour;
         eraseButton.color = inactiveButtonColour;
+        eraseText.color = inactiveButtonColour;
 
     }
 
@@ -55,6 +59,8 @@ public class UIManager : MonoBehaviour
         PlayerController.Instance.erasing = true;
         drawButton.color = inactiveButtonColour;
         eraseButton.color = activeButtonColour;
+        drawText.color = inactiveButtonColour;
+        eraseText.color = activeButtonColour;
 
     }
 
@@ -63,6 +69,7 @@ public class UIManager : MonoBehaviour
     }
 
     public IEnumerator HideLengthText() {
+        yield return new WaitForSeconds(2);
         float timer = 0;
         while(timer < fadeOutDuration) {
             // Debug.Log($"Fading at {timer} | Color is {textContainer.color.a}");
