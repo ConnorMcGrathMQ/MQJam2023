@@ -15,6 +15,7 @@ public class Plant : Tile
     public Plant next;
     public int identifier;
     public Vector3 thornOffset;
+    public Tile assistTile;
 
     public SpriteRenderer spriteRenderer;
 
@@ -120,6 +121,7 @@ public class Plant : Tile
                     
                 }
                 thornTile.transform.Translate(thornOffset, Space.Self);
+                prev.assistTile = thornTile;
             }
         }
     }
