@@ -48,6 +48,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Start() {
+        UIManager.Instance.SetDrawingMode();
+    }
+
     void OnEnable() {
         pressAction.started += PressStarted;
         pressAction.canceled += PressStopped;
@@ -63,15 +67,15 @@ public class PlayerController : MonoBehaviour
     }
 
     private void PressStopped(InputAction.CallbackContext context) {
-        if(pressRoutine != null) {
-            StopCoroutine(pressRoutine);
-        }
+        StopDrawing();
     }
 
     public void StopDrawing() {
         if(pressRoutine != null) {
             StopCoroutine(pressRoutine);
         }
+        Debug.Log("Trying fade!");
+        StartCoroutine(UIManager.Instance.HideLengthText());
     }
 
     private IEnumerator DragMovement() {
@@ -100,13 +104,14 @@ public class PlayerController : MonoBehaviour
             // diff = ClampVector(dragAction.ReadValue<Vector2>());
             if(erasing) {
                 if(targetTile is Plant p) {
-                    Debug.Log("Trying to erase!");
+                    // Debug.Log("Trying to erase!");
                     Board.Instance.DestroyPlantFrom(p);
                 }
             } else {
                 if(targetPlant == null) {
                     if(targetTile is Plant p && p.remainingDist > 0) {
                         targetPlant = p;
+                        UIManager.Instance.ShowLengthText();
                     } else if (targetTile is PlantPoint point && plantsDrawn < Board.Instance.GetCurrentLevel().plants.Count) {
                         targetPlant = Instantiate(plantPrefab);
                         // targetPlant.species = point.species;
@@ -117,6 +122,7 @@ public class PlayerController : MonoBehaviour
                         targetPlant.remainingDist = targetPlant.species.maxLength;
                         targetPlant.identifier = plantsDrawn;
                         plantsDrawn++;
+                        UIManager.Instance.ShowLengthText();
                     }
                 } else if (targetTile is Empty && Board.Instance.AreAnyAdjacentPlants(targetTile)) {
                     // Debug.Log("Added Plant to "+targetTile);
