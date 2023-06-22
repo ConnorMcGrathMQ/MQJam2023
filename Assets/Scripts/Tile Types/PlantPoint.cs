@@ -7,6 +7,7 @@ public class PlantPoint: Tile
     private int distance;
     public PlantObject species;
     public PlantPoint partner;
+    public Plant next;
 
     void Start() {
         connected = false;
@@ -19,6 +20,7 @@ public class PlantPoint: Tile
             distance = species.maxLength - plant.remainingDist;
             Board.Instance.PairComplete();
             PlayerController.Instance.StopDrawing();
+            
         }
     }
 
