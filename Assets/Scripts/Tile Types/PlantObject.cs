@@ -13,6 +13,7 @@ public class PlantObject : ScriptableObject
     public Sprite cornerSprite;
     public Sprite startSprite;
     public Sprite endSprite;
+    public Material particleMaterial;
     // public Sprite endPointSprite;
     public List<ColorPair> colorList;
 }

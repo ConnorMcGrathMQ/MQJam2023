@@ -15,6 +15,9 @@ public class PlantPoint: Tile
     }
 
     public void Connected(Plant plant) {
+        if(connected) {
+            return;
+        }
         connected = true;
         if(partner.connected) {
             distance = species.maxLength - plant.remainingDist;

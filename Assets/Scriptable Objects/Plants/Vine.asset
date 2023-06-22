@@ -17,8 +17,9 @@ MonoBehaviour:
   effectSpace: 0
   straightSprite: {fileID: 21300000, guid: b74a69476c04e43409d3a5e41f2c9bc9, type: 3}
   cornerSprite: {fileID: 21300000, guid: 6d6d80b64a7a5074bb84abfb82bb797d, type: 3}
-  startSprite: {fileID: 21300000, guid: 505c6269b3b2fb44c9fd848237e650cd, type: 3}
-  endSprite: {fileID: 21300000, guid: 5be7b01c4e29742499667a91a164d5db, type: 3}
+  startSprite: {fileID: 21300000, guid: f2b84c1c1a27c447b86e06da5aac565b, type: 3}
+  endSprite: {fileID: 21300000, guid: 107c2529abe944fcf8b650947099e3df, type: 3}
+  particleMaterial: {fileID: 2100000, guid: c0a0f77d4365d481fbd10d18331c36bf, type: 2}
   colorList:
   - vineColour: {r: 1, g: 1, b: 1, a: 1}
     highlightColour: {r: 0.2691349, g: 0.9056604, b: 0.89435476, a: 1}
