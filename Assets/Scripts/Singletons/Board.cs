@@ -65,6 +65,7 @@ public class Board : MonoBehaviour
             }
         }
     }
+    
     public Level GetCurrentLevel() {
         return levels[currentLevel];
     }
