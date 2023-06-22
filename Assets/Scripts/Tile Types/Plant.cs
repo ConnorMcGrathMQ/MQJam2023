@@ -59,9 +59,10 @@ public class Plant : Tile
             //PLANT START POINT STUFF GOES HERE
         }
         UpdateSprite();
+        UIManager.Instance.UpdateLengthText(this);
         if(species.Equals(Board.Instance.roseType)) {
             Dir thornDirection = Dir.None;
-            if(prev.remainingDist % 2 == 0) {
+            if(prev != null && prev.remainingDist % 2 == 0) {
                 switch(prev.outDir) {
                     case Dir.Up :
                         thornDirection = Dir.Left;
@@ -94,6 +95,9 @@ public class Plant : Tile
             }
             Tile thornTile = Board.Instance.GetAdjacentTile(thornDirection, 
                 Board.Instance.GetTile(prev.pos));
+            if(thornTile == null) {
+                return;
+            }
             if(thornTile is Empty) {
                 Board.Instance.AddTile(Board.Instance.thornPrefab, thornTile.pos);
                 thornTile = Board.Instance.GetTile(thornTile.pos); // get newly made one
