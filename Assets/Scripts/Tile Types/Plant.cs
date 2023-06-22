@@ -14,6 +14,7 @@ public class Plant : Tile
     public Plant prev;
     public Plant next;
     public int identifier;
+    public Vector3 thornOffset;
 
     public SpriteRenderer spriteRenderer;
 
@@ -46,6 +47,9 @@ public class Plant : Tile
                 prev.outDir = Dir.Up;
             }
             remainingDist = prev.remainingDist - 1;
+            if(remainingDist == 0) {
+                PlayerController.Instance.StopDrawing();
+            }
             prev.UpdateSprite();
             prev.next = this;
             // if(prev == next) {
@@ -55,6 +59,65 @@ public class Plant : Tile
             //PLANT START POINT STUFF GOES HERE
         }
         UpdateSprite();
+        if(species.Equals(Board.Instance.roseType)) {
+            Dir thornDirection = Dir.None;
+            if(prev.remainingDist % 2 == 0) {
+                switch(prev.outDir) {
+                    case Dir.Up :
+                        thornDirection = Dir.Left;
+                        break;
+                    case Dir.Left :
+                        thornDirection = Dir.Down;
+                        break;
+                    case Dir.Right :
+                        thornDirection = Dir.Up;
+                        break;
+                    case Dir.Down :
+                        thornDirection = Dir.Right;
+                        break;
+                }
+            } else {
+                switch(prev.outDir) {
+                    case Dir.Up :
+                        thornDirection = Dir.Right;
+                        break;
+                    case Dir.Left :
+                        thornDirection = Dir.Up;
+                        break;
+                    case Dir.Right :
+                        thornDirection = Dir.Down;
+                        break;
+                    case Dir.Down :
+                        thornDirection = Dir.Left;
+                        break;
+                }
+            }
+            Tile thornTile = Board.Instance.GetAdjacentTile(thornDirection, 
+                Board.Instance.GetTile(prev.pos));
+            if(thornTile is Empty) {
+                Board.Instance.AddTile(Board.Instance.thornPrefab, thornTile.pos);
+                thornTile = Board.Instance.GetTile(thornTile.pos); // get newly made one
+                switch(thornDirection) {
+                    case Dir.None :
+                        Debug.LogWarning("Invalid direction for a Thorn!");
+                        break;
+                    case Dir.Left :
+                        thornTile.transform.eulerAngles = new Vector3(0, 0, 90);
+                        break;
+                    case Dir.Up :
+                        thornTile.transform.eulerAngles = new Vector3(0, 0, 0);
+                        break;
+                    case Dir.Down :
+                        thornTile.transform.eulerAngles = new Vector3(0, 0, 180);
+                        break;
+                    case Dir.Right :
+                        thornTile.transform.eulerAngles = new Vector3(0, 0, -90);
+                        break;
+                    
+                }
+                thornTile.transform.Translate(thornOffset, Space.Self);
+            }
+        }
     }
 
     public void UpdateSprite() {
@@ -201,7 +264,6 @@ public class Plant : Tile
         {
             if (t is Plant p) {
                 if (p.species == this.species && p.identifier == this.identifier) {
-                    Debug.Log("Found plant at "+p);
                     plantList.Add(p);
                 }
             }
@@ -216,5 +278,11 @@ public class Plant : Tile
             }
         }
         return smallest;
+    }
+
+    void OnDisable() {
+        if(prev != null) {
+            prev.next = null;
+        }
     }
 }
