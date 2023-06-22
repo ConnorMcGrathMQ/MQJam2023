@@ -25,13 +25,14 @@ public class Board : MonoBehaviour
     public Tile emptyTilePrefab;
     public PlantPoint pointPrefab;
     public Tile obstaclePrefab;
+    public Obstacle thornPrefab;
     public Vector2Int startPoint;
     public Vector2Int endPoint;
 
     public List<Level> levels;
     private int currentLevel;
-
     private int pairsComplete;
+    public PlantObject roseType;
 
     void Awake() {
         if(Instance == null) {

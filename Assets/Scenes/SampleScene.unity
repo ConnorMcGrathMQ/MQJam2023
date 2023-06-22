@@ -158,10 +158,12 @@ MonoBehaviour:
   emptyTilePrefab: {fileID: 7945498252373563711, guid: e88fa8b127496954ea70211e69d81a37, type: 3}
   pointPrefab: {fileID: -2938556676173665149, guid: c11b4203cee48704b9afe35728e96020, type: 3}
   obstaclePrefab: {fileID: 7424272576105095094, guid: 43b1a32a2f59b7642b90f88c76273b4b, type: 3}
+  thornPrefab: {fileID: 7424272576105095094, guid: 4f2fcb158deaf479c93f5aeb18777db0, type: 3}
   startPoint: {x: 3, y: 14}
   endPoint: {x: 12, y: 2}
   levels:
   - {fileID: 11400000, guid: affdeb65cf30844d5a779742cc7adc70, type: 2}
+  roseType: {fileID: 11400000, guid: 88e9a666d53e9a647b6a77cc32b38c8e, type: 2}
 --- !u!156049354 &121731297
 Grid:
   m_ObjectHideFlags: 0
@@ -479,6 +481,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantPrefab: {fileID: 584243002301263685, guid: 015c40d7c27f71f46927626ee223f87f, type: 3}
+  targetTile: {fileID: 0}
+  erasing: 0
 --- !u!4 &772529355
 Transform:
   m_ObjectHideFlags: 0

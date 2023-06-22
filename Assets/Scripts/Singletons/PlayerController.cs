@@ -109,7 +109,8 @@ public class PlayerController : MonoBehaviour
                         targetPlant = p;
                     } else if (targetTile is PlantPoint point && plantsDrawn < Board.Instance.GetCurrentLevel().plants.Count) {
                         targetPlant = Instantiate(plantPrefab);
-                        targetPlant.species = point.species;
+                        // targetPlant.species = point.species;
+                        targetPlant.species = Board.Instance.GetCurrentLevel().plants[plantsDrawn];
                         targetPlant.pos = point.pos;
                         targetPlant.transform.position = new Vector3(1000, 0, 0);
                         point.Connected(targetPlant);
@@ -118,7 +119,7 @@ public class PlayerController : MonoBehaviour
                         plantsDrawn++;
                     }
                 } else if (targetTile is Empty && Board.Instance.AreAnyAdjacentPlants(targetTile)) {
-                    Debug.Log("Added Plant to "+targetTile);
+                    // Debug.Log("Added Plant to "+targetTile);
                     Board.Instance.AddTile(targetPlant, targetTile.pos);
                 } else if(targetTile is PlantPoint point) {
                     point.Connected(targetPlant);

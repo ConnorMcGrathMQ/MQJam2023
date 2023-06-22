@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 1
   m_EditorClassIdentifier: 
   plants:
-  - {fileID: 11400000, guid: 2aa69a14a68c0be4cbc4d964b17bc995, type: 2}
+  - {fileID: 11400000, guid: 88e9a666d53e9a647b6a77cc32b38c8e, type: 2}
   - {fileID: 11400000, guid: 2aa69a14a68c0be4cbc4d964b17bc995, type: 2}
   objectives:
   - firstPointPosition: {x: 3, y: 7}
