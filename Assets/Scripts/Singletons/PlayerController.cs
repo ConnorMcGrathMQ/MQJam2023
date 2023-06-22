@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public Tile targetTile;
 
     private int plantsDrawn;
+    public bool erasing;
 
     void Awake() {
         if(PlayerController.Instance == null) {
@@ -77,7 +78,7 @@ public class PlayerController : MonoBehaviour
         // Tile targetTile;
         Vector3Int targetCell;
         Plant targetPlant = null;
-        Vector2 diff;
+        // Vector2 diff;
         while(true) {
             targetCell = Board.Instance.GetComponent<Grid>().WorldToCell(
                     Camera.main.ScreenToWorldPoint(new Vector3(positionAction.ReadValue<Vector2>().x, 
@@ -97,30 +98,37 @@ public class PlayerController : MonoBehaviour
             // Debug.Log(targetTile);
             // Debug.Log(targetTile.ToString());
             // diff = ClampVector(dragAction.ReadValue<Vector2>());
-            if(targetPlant == null) {
-                if(targetTile is Plant p && p.remainingDist > 0) {
-                    targetPlant = p;
-                } else if (targetTile is PlantPoint point && plantsDrawn < Board.Instance.GetCurrentLevel().plants.Count) {
-                    targetPlant = Instantiate(plantPrefab);
-                    targetPlant.species = point.species;
-                    targetPlant.pos = point.pos;
-                    targetPlant.transform.position = new Vector3(1000, 0, 0);
-                    point.Connected(targetPlant);
-                    targetPlant.remainingDist = targetPlant.species.maxLength;
-                    targetPlant.identifier = plantsDrawn;
-                    plantsDrawn++;
+            if(erasing) {
+                if(targetTile is Plant p) {
+                    Debug.Log("Trying to erase!");
+                    Board.Instance.DestroyPlantFrom(p);
                 }
-            } else if (targetTile is Empty && Board.Instance.AreAnyAdjacentPlants(targetTile)) {
-                Debug.Log("Added Plant to "+targetTile);
-                Board.Instance.AddTile(targetPlant, targetTile.pos);
-            } else if(targetTile is PlantPoint point) {
-                point.Connected(targetPlant);
-            } else if (targetTile is Plant plant && (plant.next != null || !plant.species.Equals(targetPlant.species))) {
-                Debug.Log($"Intersected Plant! Ended drawing");
-                yield break;
-            } else if(targetTile is Obstacle) {
-                Debug.Log("Intersected Obstacle! Ending drawing");
-                yield break;
+            } else {
+                if(targetPlant == null) {
+                    if(targetTile is Plant p && p.remainingDist > 0) {
+                        targetPlant = p;
+                    } else if (targetTile is PlantPoint point && plantsDrawn < Board.Instance.GetCurrentLevel().plants.Count) {
+                        targetPlant = Instantiate(plantPrefab);
+                        targetPlant.species = point.species;
+                        targetPlant.pos = point.pos;
+                        targetPlant.transform.position = new Vector3(1000, 0, 0);
+                        point.Connected(targetPlant);
+                        targetPlant.remainingDist = targetPlant.species.maxLength;
+                        targetPlant.identifier = plantsDrawn;
+                        plantsDrawn++;
+                    }
+                } else if (targetTile is Empty && Board.Instance.AreAnyAdjacentPlants(targetTile)) {
+                    Debug.Log("Added Plant to "+targetTile);
+                    Board.Instance.AddTile(targetPlant, targetTile.pos);
+                } else if(targetTile is PlantPoint point) {
+                    point.Connected(targetPlant);
+                } else if (targetTile is Plant plant && (plant.next != null || !plant.species.Equals(targetPlant.species))) {
+                    Debug.Log($"Intersected Plant! Ended drawing");
+                    yield break;
+                } else if(targetTile is Obstacle) {
+                    Debug.Log("Intersected Obstacle! Ending drawing");
+                    yield break;
+                }    
             }
             // } else {
             //     Debug.Log("Stop!");

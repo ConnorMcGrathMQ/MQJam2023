@@ -220,4 +220,10 @@ public class Plant : Tile
         }
         return smallest;
     }
+
+    void OnDisable() {
+        if(prev != null) {
+            prev.next = null;
+        }
+    }
 }

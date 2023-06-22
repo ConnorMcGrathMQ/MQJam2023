@@ -88,19 +88,14 @@ public class Board : MonoBehaviour
         Tile location = tiles[pos.x,pos.y];
         Tile old = null;
         Tile newTile = null;
-        if (location != null && !(location is Empty) && replace == false) {
-            // Debug.Log($"{location.ToString()} Is Null! Hahah");
-            return;
-        } else {
-            newTile = Instantiate(tilePrefab, grid.GetCellCenterWorld(new Vector3Int(pos.x, pos.y, 0)), 
-                Quaternion.identity, this.transform);
-            old = location;
-            tiles[pos.x, pos.y] = newTile;
-            newTile.pos = pos;
-            newTile.gameObject.name = newTile.ToString();
-            if(newTile is PlantPoint point) {
-                point.FindPartner(levels[currentLevel]);
-            }
+        newTile = Instantiate(tilePrefab, grid.GetCellCenterWorld(new Vector3Int(pos.x, pos.y, 0)), 
+            Quaternion.identity, this.transform);
+        old = location;
+        tiles[pos.x, pos.y] = newTile;
+        newTile.pos = pos;
+        newTile.gameObject.name = newTile.ToString();
+        if(newTile is PlantPoint point) {
+            point.FindPartner(levels[currentLevel]);
         }
         if (old != null) {
             Destroy(old.gameObject);
@@ -169,6 +164,17 @@ public class Board : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void DestroyPlantFrom(Plant target) {
+        Plant nextPlant;
+        Plant originalPrev = target.prev;
+        while(target != null) {
+            nextPlant = target.next;
+            AddTile(emptyTilePrefab, target.pos);
+            target = nextPlant;
+        }
+        originalPrev.UpdateSprite();
     }
 
     public void PairComplete() {
