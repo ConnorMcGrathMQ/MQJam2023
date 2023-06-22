@@ -24,6 +24,7 @@ public class Board : MonoBehaviour
     public Tile[,] tiles;
     public Tile emptyTilePrefab;
     public PlantPoint pointPrefab;
+    public Tile obstaclePrefab;
     public Vector2Int startPoint;
     public Vector2Int endPoint;
 
@@ -53,12 +54,15 @@ public class Board : MonoBehaviour
         Level level = levels[currentLevel];
         for(int x = 0; x< width; x++) {
             for(int y = 0; y<height; y++) {
+                Vector2Int thisPos = new Vector2Int(x, y);
                 if(TileIsPoint(x, y, level)) {
-                    AddTile(pointPrefab, new Vector2Int(x, y));
-                } else {
-                    AddTile(emptyTilePrefab, new Vector2Int(x, y));
+                    AddTile(pointPrefab, thisPos);
+                } else if (level.obstacles.Contains(thisPos)){
+                    AddTile(obstaclePrefab, thisPos);
+                } else{
+                    AddTile(emptyTilePrefab, thisPos);
                 }
-                
+
             }
         }
     }

@@ -22,3 +22,5 @@ MonoBehaviour:
   - firstPointPosition: {x: 8, y: 9}
     secondPointPosition: {x: 1, y: 1}
     pairColour: {r: 0.9811321, g: 0.254539, b: 0.28869092, a: 1}
+  obstacles:
+  - {x: 5, y: 1}
