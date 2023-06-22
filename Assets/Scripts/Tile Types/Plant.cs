@@ -16,7 +16,7 @@ public class Plant : Tile
     public int identifier;
     public Vector3 thornOffset;
     public Tile assistTile;
-
+    public PlantPoint connector;
     public SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
@@ -53,6 +53,7 @@ public class Plant : Tile
             }
             prev.UpdateSprite();
             prev.next = this;
+            connector = prev.connector;
             // if(prev == next) {
             //     next = null;
             // }
@@ -60,6 +61,9 @@ public class Plant : Tile
             //PLANT START POINT STUFF GOES HERE
         }
         UpdateSprite();
+        // if(Board.Instance.AreAdjacent(connector, this)) {
+        //     Board.Instance.CreateEnergyEffect(this);
+        // }
         UIManager.Instance.UpdateLengthText(this);
         if(species.Equals(Board.Instance.roseType)) {
             Dir thornDirection = Dir.None;

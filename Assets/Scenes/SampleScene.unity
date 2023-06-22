@@ -159,8 +159,7 @@ MonoBehaviour:
   pointPrefab: {fileID: -2938556676173665149, guid: c11b4203cee48704b9afe35728e96020, type: 3}
   obstaclePrefab: {fileID: 7424272576105095094, guid: 43b1a32a2f59b7642b90f88c76273b4b, type: 3}
   thornPrefab: {fileID: 7424272576105095094, guid: 4f2fcb158deaf479c93f5aeb18777db0, type: 3}
-  startPoint: {x: 3, y: 14}
-  endPoint: {x: 12, y: 2}
+  energyParticles: {fileID: 6577445876040317407, guid: 9c0672f7592df410ba29d2b9ffd08821, type: 3}
   levels:
   - {fileID: 11400000, guid: affdeb65cf30844d5a779742cc7adc70, type: 2}
   - {fileID: 11400000, guid: ba569919ca7ff47039b97627c8efffcd, type: 2}
