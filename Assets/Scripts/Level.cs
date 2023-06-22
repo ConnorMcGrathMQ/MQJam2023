@@ -7,6 +7,7 @@ public class Level : ScriptableObject
 {
     public List<PlantObject> plants;
     public List<Objective> objectives;
+    public List<Vector2Int> obstacles;
 
     public Objective FindPair(Vector2Int objectivePosition) {
         foreach (Objective o in objectives) {

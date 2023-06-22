@@ -157,6 +157,7 @@ MonoBehaviour:
   height: 15
   emptyTilePrefab: {fileID: 7945498252373563711, guid: e88fa8b127496954ea70211e69d81a37, type: 3}
   pointPrefab: {fileID: -2938556676173665149, guid: c11b4203cee48704b9afe35728e96020, type: 3}
+  obstaclePrefab: {fileID: 7424272576105095094, guid: 43b1a32a2f59b7642b90f88c76273b4b, type: 3}
   startPoint: {x: 3, y: 14}
   endPoint: {x: 12, y: 2}
   levels:
