@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
             StopCoroutine(pressRoutine);
         }
         Debug.Log("Trying fade!");
-        StartCoroutine(UIManager.Instance.HideLengthText());
+        UIManager.Instance.fadingRoutine = StartCoroutine(UIManager.Instance.HideLengthText());
     }
 
     private IEnumerator DragMovement() {
