@@ -29,10 +29,15 @@ public class UIManager : MonoBehaviour
     public float fadeOutDuration = 1;
 
     private Coroutine fadingRoutine;
+    public Image levelComplete;
+    public TextMeshProUGUI completionText;
+
+    public TextMeshProUGUI boardFilledText;
 
     void Awake() {
         if(UIManager.Instance == null) {
             Instance = this;
+            levelComplete.gameObject.SetActive(false);
         } else {
             Debug.Log("Multiple UI Managers exist! Destroying...");
             Destroy(this.gameObject);
@@ -79,5 +84,15 @@ public class UIManager : MonoBehaviour
                 textContainer.color.g, textContainer.color.b, 1);
         lengthText.color = new Color(lengthText.color.r, 
                 lengthText.color.g, lengthText.color.b, 1);
+    }
+
+    public void OpenLevelComplete() {
+        levelComplete.gameObject.SetActive(true);
+        completionText.text = $"Level {Board.Instance.CurrentLevel} Complete!";
+        boardFilledText.text = $"Filled {Board.Instance.GetFilledPercent()}% of the Board!";
+    }
+
+    public void CloseLevelComplete() {
+        levelComplete.gameObject.SetActive(false);
     }
 }

@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
     public Tile targetTile;
 
-    private int plantsDrawn;
+    public int plantsDrawn;
     public bool erasing;
 
     void Awake() {
