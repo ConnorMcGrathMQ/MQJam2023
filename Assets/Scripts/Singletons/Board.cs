@@ -183,11 +183,16 @@ public class Board : MonoBehaviour
         Plant originalPrev = target.prev;
         while(target != null) {
             nextPlant = target.next;
-            if(target.assistTile != null) {
-                AddTile(emptyTilePrefab, target.assistTile.pos);
-            }
-            AddTile(emptyTilePrefab, target.pos);
-            target = nextPlant;
+            if(target.prev == null) {
+                Debug.Log("Is original, skipping...");
+                target = nextPlant;
+            } else {
+                if(target.assistTile != null) {
+                    AddTile(emptyTilePrefab, target.assistTile.pos);
+                }
+                AddTile(emptyTilePrefab, target.pos);
+                target = nextPlant;
+            }   
         }
         originalPrev.UpdateSprite();
     }
