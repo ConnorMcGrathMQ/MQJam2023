@@ -4,6 +4,13 @@ using UnityEngine;
 public class PlantPoint: Tile
 {
     private bool connected;
+    public bool isConnected
+    {
+        get
+        {
+            return connected;
+        }
+    }
     private int distance;
     public PlantObject species;
     public PlantPoint partner;
@@ -25,6 +32,11 @@ public class PlantPoint: Tile
             PlayerController.Instance.StopDrawing();
             
         }
+    }
+
+    public void Disconnect() {
+        // connected = false;
+        partner.connected = false;
     }
 
     public void FindPartner(Level level) {

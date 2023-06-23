@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
                         targetPlant = p;
                         UIManager.Instance.ShowLengthText();
                     } else if (targetTile is PlantPoint point && plantsDrawn < Board.Instance.GetCurrentLevel().objectives.Count
-                        && point.next == null) {
+                        && !point.isConnected && !point.partner.isConnected) {
                         targetPlant = Instantiate(plantPrefab);
                         targetPlant.connector = point;
                         targetPlant.species = point.species;
@@ -129,7 +129,6 @@ public class PlayerController : MonoBehaviour
                         targetPlant.remainingDist = targetPlant.species.maxLength;
                         targetPlant.identifier = plantsDrawn;
                         plantsDrawn++;
-                        point.next = targetPlant;
                         UIManager.Instance.ShowLengthText();
                         spawnedPlant = true;
                     }
@@ -139,7 +138,7 @@ public class PlayerController : MonoBehaviour
                     spawnedPlant = false;
                 } else if(targetTile is PlantPoint point && targetPlant.connector.partner.Equals(point)) {
                     point.Connected(targetPlant);
-                    targetPlant.EnableParticles();
+                    // targetPlant.EnableParticles();
                 } else if (targetTile is Plant plant && (plant.next != null || !plant.species.Equals(targetPlant.species))) {
                     Debug.Log($"Intersected Plant! Ended drawing");
                     yield break;

@@ -183,6 +183,11 @@ public class Board : MonoBehaviour
     public void DestroyPlantFrom(Plant target) {
         Plant nextPlant;
         Plant originalPrev = target.prev;
+        if(target.connector.isConnected && target.connector.partner.isConnected) {
+            Debug.Log("Disconnecting!");
+            target.connector.Disconnect();
+            pairsComplete--;
+        }
         while(target != null) {
             nextPlant = target.next;
             if(target.prev == null) {
