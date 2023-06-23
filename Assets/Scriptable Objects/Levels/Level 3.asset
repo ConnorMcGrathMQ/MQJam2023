@@ -10,30 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5925ad396d2654267a69ef9e834a9eb0, type: 3}
-  m_Name: Level 2
+  m_Name: Level 3
   m_EditorClassIdentifier: 
   objectives:
-  - firstPointPosition: {x: 3, y: 7}
-    secondPointPosition: {x: 9, y: 7}
+  - firstPointPosition: {x: 0, y: 5}
+    secondPointPosition: {x: 8, y: 7}
     pairColour: {r: 0.40899786, g: 0.6670557, b: 0.9528302, a: 1}
-    species: {fileID: 11400000, guid: 2aa69a14a68c0be4cbc4d964b17bc995, type: 2}
-  - firstPointPosition: {x: 8, y: 9}
-    secondPointPosition: {x: 1, y: 1}
+    species: {fileID: 11400000, guid: 88e9a666d53e9a647b6a77cc32b38c8e, type: 2}
+  - firstPointPosition: {x: 4, y: 9}
+    secondPointPosition: {x: 8, y: 1}
     pairColour: {r: 0.9811321, g: 0.254539, b: 0.28869092, a: 1}
     species: {fileID: 11400000, guid: 2aa69a14a68c0be4cbc4d964b17bc995, type: 2}
-  - firstPointPosition: {x: 8, y: 2}
-    secondPointPosition: {x: 1, y: 6}
+  - firstPointPosition: {x: 0, y: 1}
+    secondPointPosition: {x: 6, y: 0}
     pairColour: {r: 0.76339775, g: 0.25490195, b: 0.98039216, a: 1}
     species: {fileID: 11400000, guid: 88e9a666d53e9a647b6a77cc32b38c8e, type: 2}
-  - firstPointPosition: {x: 3, y: 3}
-    secondPointPosition: {x: 9, y: 0}
-    pairColour: {r: 0.98039216, g: 0.9200311, b: 0.25490195, a: 1}
-    species: {fileID: 11400000, guid: 88e9a666d53e9a647b6a77cc32b38c8e, type: 2}
   obstacles:
-  - {x: 4, y: 2}
-  - {x: 8, y: 6}
-  - {x: 4, y: 6}
-  - {x: 3, y: 1}
-  - {x: 5, y: 7}
+  - {x: 4, y: 8}
   - {x: 5, y: 8}
-  - {x: 5, y: 6}
+  - {x: 2, y: 4}
+  - {x: 2, y: 5}
+  - {x: 2, y: 6}
+  - {x: 2, y: 7}
+  - {x: 3, y: 0}
+  - {x: 3, y: 1}
+  - {x: 3, y: 2}
+  - {x: 6, y: 3}

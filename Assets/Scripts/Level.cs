@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Level", menuName = "Recomposition/Level")]
 public class Level : ScriptableObject
 {
-    public List<PlantObject> plants;
     public List<Objective> objectives;
     public List<Vector2Int> obstacles;
 
@@ -24,4 +23,5 @@ public struct Objective {
     public Vector2Int firstPointPosition;
     public Vector2Int secondPointPosition;
     public Color pairColour;
+    public PlantObject species;
 }

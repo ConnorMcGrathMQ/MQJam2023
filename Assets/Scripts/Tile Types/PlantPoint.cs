@@ -51,6 +51,8 @@ public class PlantPoint: Tile
             GetComponent<SpriteRenderer>().color = obj.pairColour;
             partner.GetComponent<SpriteRenderer>().color = obj.pairColour;
             partner.partner = this;
+            species = obj.species;
+            partner.species = obj.species;
         }
     }
 

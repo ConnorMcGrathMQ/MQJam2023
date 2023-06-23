@@ -20,12 +20,9 @@ MonoBehaviour:
   startSprite: {fileID: 21300000, guid: f2b84c1c1a27c447b86e06da5aac565b, type: 3}
   endSprite: {fileID: 21300000, guid: 107c2529abe944fcf8b650947099e3df, type: 3}
   particleMaterial: {fileID: 2100000, guid: c0a0f77d4365d481fbd10d18331c36bf, type: 2}
-  colorList:
-  - vineColour: {r: 1, g: 1, b: 1, a: 1}
-    highlightColour: {r: 0.2691349, g: 0.9056604, b: 0.89435476, a: 1}
-  - vineColour: {r: 0.846046, g: 0, b: 1, a: 1}
-    highlightColour: {r: 1, g: 0, b: 0, a: 1}
-  - vineColour: {r: 0.67887425, g: 0.67105734, b: 0.9811321, a: 1}
-    highlightColour: {r: 1, g: 0, b: 0.66871834, a: 1}
-  - vineColour: {r: 1, g: 0.99642503, b: 0, a: 1}
-    highlightColour: {r: 1, g: 0.405365, b: 0, a: 1}
+  vineColours:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.99828166, g: 1, b: 0.6462264, a: 1}
+  - {r: 1, g: 0.5896226, b: 0.5896226, a: 1}
+  - {r: 0.5990566, g: 0.7090363, b: 1, a: 1}
+  - {r: 1, g: 0.5801887, b: 0.9052086, a: 1}

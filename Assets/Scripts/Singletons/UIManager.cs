@@ -29,12 +29,12 @@ public class UIManager : MonoBehaviour
     public Color inactiveButtonColour;
     public AnimationCurve fadeOutCurve;
     public float fadeOutDuration = 1;
-
     public Coroutine fadingRoutine;
     public Image levelComplete;
     public TextMeshProUGUI completionText;
-
     public TextMeshProUGUI boardFilledText;
+    public TextMeshProUGUI endGameText;
+    public Button nextLevelButton;
 
     public GameObject stars;
 
@@ -100,10 +100,14 @@ public class UIManager : MonoBehaviour
         completionText.text = $"Level {Board.Instance.CurrentLevel} Complete!";
         boardFilledText.text = $"Filled {Board.Instance.GetFilledPercent()}% of the Board!";
         if (Board.Instance.GetFilledPercent() > 33f) {
-            stars.transform.GetChild(1).GetComponent<Image>().color = new Color(1f,1f,1f);
+            stars.transform.GetChild(1).GetComponent<Image>().color = Color.yellow;
         } 
         if (Board.Instance.GetFilledPercent() > 67f) {
-            stars.transform.GetChild(2).GetComponent<Image>().color = new Color(1f,1f,1f);
+            stars.transform.GetChild(2).GetComponent<Image>().color = Color.yellow;
+        }
+        if(Board.Instance.CurrentLevel >= Board.Instance.levels.Count) {
+            nextLevelButton.gameObject.SetActive(false);
+            endGameText.gameObject.SetActive(true);
         }
     }
 

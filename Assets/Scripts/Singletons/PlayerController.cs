@@ -24,13 +24,14 @@ public class PlayerController : MonoBehaviour
     private InputAction positionAction;
     private Coroutine pressRoutine;
 
-    private PlantObject targetPlant;
+    private Plant targetPlant;
     public Plant plantPrefab;
 
     public Tile targetTile;
 
     public int plantsDrawn;
     public bool erasing;
+    private bool spawnedPlant;
 
     void Awake() {
         if(PlayerController.Instance == null) {
@@ -74,14 +75,19 @@ public class PlayerController : MonoBehaviour
         if(pressRoutine != null) {
             StopCoroutine(pressRoutine);
         }
-        Debug.Log("Trying fade!");
+        if(targetPlant != null) {
+            if(spawnedPlant) {
+                Destroy(targetPlant.gameObject);
+                plantsDrawn--;
+            }
+            targetPlant = null;
+        }
         UIManager.Instance.fadingRoutine = StartCoroutine(UIManager.Instance.HideLengthText());
     }
 
     private IEnumerator DragMovement() {
         // Tile targetTile;
         Vector3Int targetCell;
-        Plant targetPlant = null;
         // Vector2 diff;
         while(true) {
             targetCell = Board.Instance.GetComponent<Grid>().WorldToCell(
@@ -112,22 +118,25 @@ public class PlayerController : MonoBehaviour
                     if(targetTile is Plant p && p.remainingDist > 0) {
                         targetPlant = p;
                         UIManager.Instance.ShowLengthText();
-                    } else if (targetTile is PlantPoint point && plantsDrawn < Board.Instance.GetCurrentLevel().plants.Count) {
+                    } else if (targetTile is PlantPoint point && plantsDrawn < Board.Instance.GetCurrentLevel().objectives.Count
+                        && point.next == null) {
                         targetPlant = Instantiate(plantPrefab);
                         targetPlant.connector = point;
-                        // targetPlant.species = point.species;
-                        targetPlant.species = Board.Instance.GetCurrentLevel().plants[plantsDrawn];
+                        targetPlant.species = point.species;
                         targetPlant.pos = point.pos;
                         targetPlant.transform.position = new Vector3(1000, 0, 0);
                         point.Connected(targetPlant);
                         targetPlant.remainingDist = targetPlant.species.maxLength;
                         targetPlant.identifier = plantsDrawn;
                         plantsDrawn++;
+                        point.next = targetPlant;
                         UIManager.Instance.ShowLengthText();
+                        spawnedPlant = true;
                     }
                 } else if (targetTile is Empty && Board.Instance.AreAnyAdjacentPlants(targetTile)) {
                     // Debug.Log("Added Plant to "+targetTile);
                     Board.Instance.AddTile(targetPlant, targetTile.pos);
+                    spawnedPlant = false;
                 } else if(targetTile is PlantPoint point && targetPlant.connector.partner.Equals(point)) {
                     point.Connected(targetPlant);
                     targetPlant.EnableParticles();

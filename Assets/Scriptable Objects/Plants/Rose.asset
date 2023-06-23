@@ -13,19 +13,16 @@ MonoBehaviour:
   m_Name: Rose
   m_EditorClassIdentifier: 
   type: 1
-  maxLength: 12
+  maxLength: 16
   effectSpace: 0
   straightSprite: {fileID: 21300000, guid: 65f4f239f1f336d488851539d9d8742b, type: 3}
   cornerSprite: {fileID: 21300000, guid: 67af973aa02bf764ea9298d388e5110c, type: 3}
   startSprite: {fileID: 21300000, guid: f2b84c1c1a27c447b86e06da5aac565b, type: 3}
   endSprite: {fileID: 21300000, guid: 23c302bd2d8d44601a76e0ffc4c9ac7f, type: 3}
   particleMaterial: {fileID: 2100000, guid: 939dd0a0a2ba94cfbb30e76df5f95589, type: 2}
-  colorList:
-  - vineColour: {r: 1, g: 1, b: 1, a: 1}
-    highlightColour: {r: 1, g: 0, b: 0, a: 1}
-  - vineColour: {r: 0.990566, g: 0.7335796, b: 0.73730403, a: 1}
-    highlightColour: {r: 1, g: 1, b: 1, a: 1}
-  - vineColour: {r: 0.503827, g: 0.9622642, b: 0.6136952, a: 1}
-    highlightColour: {r: 1, g: 1, b: 1, a: 1}
-  - vineColour: {r: 1, g: 0.5330188, b: 0.97319114, a: 1}
-    highlightColour: {r: 1, g: 1, b: 1, a: 1}
+  vineColours:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.99828166, g: 1, b: 0.6462264, a: 1}
+  - {r: 1, g: 0.5896226, b: 0.5896226, a: 1}
+  - {r: 0.5990566, g: 0.7090363, b: 1, a: 1}
+  - {r: 1, g: 0.5801887, b: 0.9052086, a: 1}

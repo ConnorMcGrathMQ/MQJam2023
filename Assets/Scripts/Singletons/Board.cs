@@ -196,6 +196,7 @@ public class Board : MonoBehaviour
                 target = nextPlant;
             }   
         }
+        originalPrev.DisableParticles();
         originalPrev.UpdateSprite();
     }
 

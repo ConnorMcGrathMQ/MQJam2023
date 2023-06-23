@@ -15,10 +15,5 @@ public class PlantObject : ScriptableObject
     public Sprite endSprite;
     public Material particleMaterial;
     // public Sprite endPointSprite;
-    public List<ColorPair> colorList;
-}
-[System.Serializable]
-public struct ColorPair {
-    public Color vineColour;
-    public Color highlightColour;
+    public List<Color> vineColours;
 }

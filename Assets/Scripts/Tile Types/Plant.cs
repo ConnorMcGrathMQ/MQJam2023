@@ -28,7 +28,6 @@ public class Plant : Tile
         prev = null;
         next = null;
         prev = FindSmallestNeighbour();
-        
         if (prev != null) {
             if (prev.pos.x > this.pos.x) {
                 //Prev on Rightside
@@ -131,7 +130,7 @@ public class Plant : Tile
     }
 
     public void UpdateSprite() {
-        spriteRenderer.color = species.colorList[identifier].vineColour;
+        spriteRenderer.color = species.vineColours[identifier];
         transform.eulerAngles = new Vector3(0, 0, 0);
         spriteRenderer.flipX = false;
         switch (inDir)
@@ -299,6 +298,8 @@ public class Plant : Tile
     public void EnableParticles() {
         GetComponent<ParticleSystem>().Play();
         GetComponent<ParticleSystemRenderer>().material = species.particleMaterial;
+        var main = GetComponent<ParticleSystem>().main;
+        main.startColor = spriteRenderer.color;
         Debug.Log($"{this} particles were turned on!");
         if(prev != null) {
             prev.EnableParticles();
@@ -307,8 +308,9 @@ public class Plant : Tile
 
     public void DisableParticles() {
         GetComponent<ParticleSystem>().Stop();
-        if(next != null) {
-            next.EnableParticles();
+        Debug.Log($"{this} particles were turned off!");
+        if(prev != null) {
+            prev.DisableParticles();
         }
     }
 }
