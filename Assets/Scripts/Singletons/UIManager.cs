@@ -113,5 +113,8 @@ public class UIManager : MonoBehaviour
 
     public void CloseLevelComplete() {
         levelComplete.gameObject.SetActive(false);
+        for(int i = 1; i<3; i++) {
+            stars.transform.GetChild(i).GetComponent<Image>().color = Color.black;
+        }
     }
 }
