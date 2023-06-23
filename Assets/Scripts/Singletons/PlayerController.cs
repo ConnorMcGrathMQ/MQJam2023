@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
         }
         if(targetPlant != null) {
             if(spawnedPlant) {
+                targetPlant.connector.setConnection = false;
                 Destroy(targetPlant.gameObject);
                 plantsDrawn--;
             }

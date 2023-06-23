@@ -11,6 +11,13 @@ public class PlantPoint: Tile
             return connected;
         }
     }
+    public bool setConnection
+    {
+        set
+        {
+            connected = value;
+        }
+    }
     private int distance;
     public PlantObject species;
     public PlantPoint partner;
